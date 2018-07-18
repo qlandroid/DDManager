@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">舵定分</string>
+    <string name="title_order_list">订单列表</string>
+    <string name="title_order_details">订单详情</string>
+    <string name="title_apply_order_list">还款列表</string>
+    <string name="title_input_user_details">个人信息填写</string>
+    <string name="title_input_project_details">项目信息填写</string>
+    <string name="title_agreement">签署合同</string>
+    <string name="title_id_card">身份证信息录入</string>
+    <string name="next">下一步</string>
+
+    <string name="shoot_id_card_front">拍摄身份证正面</string>
+    <string name="id_card_front">身份证正面</string>
+    <string name="shoot_id_card_side">拍摄身份证反面</string>
+    <string name="id_card_side">身份证反面</string>
+</resources>
