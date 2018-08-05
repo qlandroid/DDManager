@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 //JVM会读取注解,所以利用反射可以获得注解
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Layout {
+public @interface BindLayout {
 
     String title() default "";
 
@@ -38,7 +38,7 @@ public @interface Layout {
      * 如设置为 0 则不显示
      * @return
      */
-    @DrawableRes int backRes() default R.drawable.icon_back;
+    @DrawableRes int backRes() default R.drawable.ic_navigate_before_black_24dp;
 
     @IdRes int topbarId() default R.id.topbar;
 

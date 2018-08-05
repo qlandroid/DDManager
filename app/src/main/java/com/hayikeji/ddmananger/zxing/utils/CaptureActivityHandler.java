@@ -23,11 +23,11 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.google.zxing.Result;
+import com.hayikeji.ddmananger.R;
+import com.hayikeji.ddmananger.zxing.activity.CaptureActivity;
+import com.hayikeji.ddmananger.zxing.camera.CameraManager;
+import com.hayikeji.ddmananger.zxing.decode.DecodeThread;
 
-import org.ddf.app.R;
-import org.ddf.app.zxing.activity.CaptureActivity;
-import org.ddf.app.zxing.camera.CameraManager;
-import org.ddf.app.zxing.decode.DecodeThread;
 
 /**
  * This class handles all the messaging which comprises the state machine for

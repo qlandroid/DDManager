@@ -1,4 +1,8 @@
 <resources>
+
+    <style name="AppTheme" parent="MyAppBaseTheme">
+        <item name="android:screenOrientation">portrait</item>
+    </style>
     <!-- Base application theme. -->
     <style name="MyAppBaseTheme" parent="QMUI.Compat.NoActionBar">
         <!-- Customize your theme here. -->
@@ -89,9 +93,6 @@
         <item name="android:background">@drawable/qmui_divider_bottom_bitmap</item>
     </style>
 
-    <style name="AppTheme" parent="MyAppBaseTheme">
-        <item name="android:screenOrientation">portrait</item>
-    </style>
 
     <style name="AnimationActivity" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>

@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.ql.bindview.BindViewUtils;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,30 +21,30 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hayikeji.ddmananger.R;
+import com.hayikeji.ddmananger.utils.ToastUtils;
+import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.zhy.http.okhttp.OkHttpUtils;
-
 
 
 /**
  * Created by mrqiu on 2017/10/2.
  */
 
-public abstract class BaseFragment extends Fragment implements View.OnClickListener {
+public abstract class BaseFragment extends Fragment implements View.OnClickListener ,IDialog{
     private final int REQUEST_CHOOSE_PHOTO = 22;//点击头像切换头像
+    public QMUITopBar mTopbar;
+    public int layoutRes;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        int viewId = createView();
-        View view = inflater.inflate(viewId, container, false);
+        LayoutUtils.bind(this);
+        View view = inflater.inflate(layoutRes, container, false);
+        LayoutUtils.bindFragmentTopbar(this,view);
         BindViewUtils.find(this, view);
         return view;
-    }
-
-    public int createView() {
-        return -1;
     }
 
     @Override
@@ -100,7 +101,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
 
-
     public void setTextView(String s, TextView tv) {
         setTextView(s, "", tv);
     }
@@ -118,47 +118,83 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         OkHttpUtils.getInstance().cancelTag(this);
     }
 
-    public void displayNoDesign() {
-        new QMUIDialog.MessageDialogBuilder(getContext())
-                .setMessage("该版本未开放，请耐心等待")
-                .addAction("确定", new QMUIDialogAction.ActionListener() {
-                    @Override
-                    public void onClick(QMUIDialog dialog, int index) {
-                        dialog.cancel();
-                    }
-                }).setTitle("提示")
-                .show();
+    @Override
+    public void displayLoadingDialog(CharSequence msg) {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog)((IDialog) activity).displayLoadingDialog(msg);
     }
 
-    public void displayMsgDialog(String title, String msg) {
-        new QMUIDialog.MessageDialogBuilder(getContext())
-                .setMessage(msg)
-                .setTitle(title)
-                .addAction("确定", new QMUIDialogAction.ActionListener() {
-                    @Override
-                    public void onClick(QMUIDialog dialog, int index) {
-                        dialog.cancel();
-                    }
-                })
-                .show();
+    @Override
+    public void cancelLoadingDialog() {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog)((IDialog) activity).cancelLoadingDialog();
     }
 
-    public void displayMsgDialog(String msg) {
-        displayMsgDialog("提示", msg);
+    @Override
+    public void displayTipDialogFail(CharSequence msg, long l) {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog)((IDialog) activity).displayTipDialogFail(msg,l);
     }
 
-
-    public void displayLoading() {
-        displayLoading("");
+    @Override
+    public void displayTipDialogFail(CharSequence msg) {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog)((IDialog) activity).displayTipDialogFail(msg);
     }
 
-    public void displayLoading(CharSequence msg) {
-        ((BaseActivity) getActivity()).displayLoadingDialog(msg);
+    @Override
+    public void cancelTipDialogFail() {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog)((IDialog) activity).cancelTipDialogFail();
     }
 
-    public void cancelLoading() {
-        ((BaseActivity) getActivity()).cancelLoadingDialog();
+    @Override
+    public void cancelTipDialogSuccess() {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog)((IDialog) activity).cancelTipDialogSuccess();
+    }
 
+    @Override
+    public void displayTipDialogSuccess(CharSequence msg, long l) {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog)((IDialog) activity).displayTipDialogSuccess(msg,l);
+    }
+
+    @Override
+    public void displayTipDialogSuccess(CharSequence msg) {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog)((IDialog) activity).displayTipDialogSuccess(msg);
+    }
+
+    @Override
+    public void displayMessageDialog(CharSequence msg) {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog)
+            ((IDialog) activity).displayMessageDialog(msg);
+    }
+
+    @Override
+    public void displayMessageDialog(CharSequence msg, boolean isCancel) {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog) {
+            ((IDialog) activity).displayMessageDialog(msg,isCancel);
+        }
+    }
+
+    @Override
+    public void displayMessageDialog(CharSequence msg, String action, QMUIDialogAction.ActionListener l) {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog) {
+            ((IDialog) activity).displayMessageDialog(msg,action,l);
+        }
+    }
+
+    @Override
+    public void toast(CharSequence msg) {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof IDialog) {
+           ((IDialog) activity).toast(msg);
+        }
     }
 
     public void openAlbum() {

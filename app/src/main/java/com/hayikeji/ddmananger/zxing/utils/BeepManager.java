@@ -26,7 +26,8 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import org.ddf.app.R;
+
+import com.hayikeji.ddmananger.R;
 
 import java.io.Closeable;
 import java.io.IOException;

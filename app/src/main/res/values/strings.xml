@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">舵定分</string>
+    <string name="app_name">电能管家</string>
     <string name="title_order_list">订单列表</string>
     <string name="title_order_details">订单详情</string>
     <string name="title_apply_order_list">还款列表</string>

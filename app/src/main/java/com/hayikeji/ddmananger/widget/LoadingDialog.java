@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.widget.TextView;
 
-import org.ddf.app.R;
+import com.hayikeji.ddmananger.R;
 
 
 /**

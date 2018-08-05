@@ -24,7 +24,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-import org.ddf.app.zxing.camera.open.OpenCameraInterface;
+
+import com.hayikeji.ddmananger.zxing.camera.open.OpenCameraInterface;
 
 import java.io.IOException;
 

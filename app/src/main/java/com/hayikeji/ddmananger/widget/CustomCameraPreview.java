@@ -19,8 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import org.ddf.app.utils.LogUtil;
-import org.ddf.app.utils.SystemUtils;
+import com.hayikeji.ddmananger.utils.LogUtils;
+import com.hayikeji.ddmananger.utils.SystemUtils;
+
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -331,7 +332,7 @@ public class CustomCameraPreview extends ViewGroup implements SurfaceHolder.Call
                 reAutoFocus();
             }
         } catch (Exception ex) {
-            LogUtil.showLog(TAG, "Failed to start preview: " + ex.getMessage());
+            LogUtils.e(TAG, "Failed to start preview: " + ex.getMessage());
         }
 
     }

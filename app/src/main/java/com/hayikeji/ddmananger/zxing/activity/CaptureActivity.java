@@ -35,9 +35,10 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseActivity;
-import com.hayikeji.ddmananger.base.Layout;
+import com.hayikeji.ddmananger.base.BindLayout;
 import com.hayikeji.ddmananger.utils.ImgDecode;
 import com.hayikeji.ddmananger.zxing.camera.CameraManager;
+import com.hayikeji.ddmananger.zxing.decode.DecodeThread;
 import com.hayikeji.ddmananger.zxing.utils.BeepManager;
 import com.hayikeji.ddmananger.zxing.utils.CaptureActivityHandler;
 import com.hayikeji.ddmananger.zxing.utils.InactivityTimer;
@@ -55,7 +56,7 @@ import java.lang.reflect.Field;
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
-@Layout(layoutRes = R.layout.activity_capture, title = "扫描二维码")
+@BindLayout(layoutRes = R.layout.activity_capture, title = "扫描二维码")
 public final class CaptureActivity extends BaseActivity implements SurfaceHolder.Callback {
     public static final String RESULT = "result";
     private static final String TAG = CaptureActivity.class.getSimpleName();
