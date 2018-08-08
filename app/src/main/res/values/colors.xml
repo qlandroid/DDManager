@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
@@ -34,6 +33,7 @@
 
     <color name="text_black_color">#333333</color>
     <color name="text_black_color_5">#515151</color>
+    <color name="text_black_color_2">#6b6b6b</color>
     <color name="text_tag_black_color">@color/text_label_color</color>
     <color name="text_label_color">#9A9A9A</color>
     <color name="text_blue_color">#63ABC0</color>
@@ -43,6 +43,7 @@
     <color name="text_red_color">#ff5858</color>
     <color name="text_green_color">#acf181</color>
     <color name="hideColor">#00ff00ff</color>
+    <color name="hideColor_1">#07000000</color>
 
 
     <!-- common -->

@@ -1,5 +1,6 @@
 package com.hayikeji.ddmananger.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -13,6 +14,7 @@ import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 
+import java.io.ObjectInput;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -33,15 +35,34 @@ public class LayoutUtils {
         bindActivityLayout(object);
     }
 
-    public static void bind(BaseFragment fragment){
-       Class clazz =  fragment.getClass();
+    public static View bind(BaseFragment fragment) {
+        Class clazz = fragment.getClass();
+        LayoutInflater layoutInflater = fragment.getActivity().getLayoutInflater();
         if (!clazz.isAnnotationPresent(BindLayout.class)) {
-            return;
+            return null;
         }
         BindLayout bindLayout = (BindLayout) clazz.getAnnotation(BindLayout.class);
-        fragment.layoutRes = bindLayout.layoutRes();
-    }
+        View inflate = layoutInflater.inflate(bindLayout.layoutRes(), null);
+        if (!bindLayout.bindTopBar()) {
+            return inflate;
+        }
+        Context ctx = fragment.getContext();
+        LinearLayout linearLayout = new LinearLayout(ctx);
+        linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        QMUITopBar topBar = new QMUITopBar(ctx);
+        topBar.setId(R.id.topbar);
+        float topbarHeight = ctx.getResources().getDimension(R.dimen.titleHeight);
+        float v = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, topbarHeight, ctx.getResources().getDisplayMetrics());
+        topBar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) v));
+        linearLayout.addView(topBar);
+        linearLayout.addView(inflate, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
+        setTopbar(fragment, bindLayout, topBar);
+
+        return linearLayout;
+
+    }
 
 
     private static void bindFragmentLayout(Object object) {
@@ -115,6 +136,10 @@ public class LayoutUtils {
             e.printStackTrace();
         }
 
+        setTopbar((View.OnClickListener) object, annotation, topBar);
+    }
+
+    private static void setTopbar(View.OnClickListener object, BindLayout annotation, QMUITopBar topBar) {
         if (topBar == null) return;
 
         String title = annotation.title();
@@ -128,16 +153,15 @@ public class LayoutUtils {
         int backRes = annotation.backRes();
         if (0 != backRes) {
             QMUIAlphaImageButton backImageButton = topBar.addLeftBackImageButton();
-            backImageButton.setOnClickListener((View.OnClickListener) object);
+            backImageButton.setOnClickListener(object);
             backImageButton.setImageResource(backRes);
             backImageButton.setChangeAlphaWhenPress(true);
         }
     }
 
     private static void bindContentView(Object object, Class<?> aClass, int layoutRes) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        Method setLayoutRes = aClass.getMethod("setContentView", new Class[]{int.class});
-        if (setLayoutRes != null) {
-            setLayoutRes.invoke(object, layoutRes);
+        if (object instanceof Activity) {
+            ((Activity) object).setContentView(layoutRes);
         }
     }
 

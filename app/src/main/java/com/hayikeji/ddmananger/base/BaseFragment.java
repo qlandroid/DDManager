@@ -35,13 +35,11 @@ import com.zhy.http.okhttp.OkHttpUtils;
 public abstract class BaseFragment extends Fragment implements View.OnClickListener ,IDialog{
     private final int REQUEST_CHOOSE_PHOTO = 22;//点击头像切换头像
     public QMUITopBar mTopbar;
-    public int layoutRes;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LayoutUtils.bind(this);
-        View view = inflater.inflate(layoutRes, container, false);
+        View view = LayoutUtils.bind(this);
         LayoutUtils.bindFragmentTopbar(this,view);
         BindViewUtils.find(this, view);
         return view;
@@ -271,5 +269,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         }
         return path;
     }
+
+
+
 
 }

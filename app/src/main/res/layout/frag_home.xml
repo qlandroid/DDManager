@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/frag_home_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    app:image_scale_type="fit_xy"
+                    app:indicator_height="6dp"
+                    app:indicator_margin="4dp"
+                    app:indicator_width="6dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/frag_home_rv_nav"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/frag_home_rv_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</FrameLayout>

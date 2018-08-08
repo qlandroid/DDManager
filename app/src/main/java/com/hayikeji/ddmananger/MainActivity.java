@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.hayikeji.ddmananger.base.BaseActivity;
 import com.hayikeji.ddmananger.ui.activity.HomeActivity;
+import com.hayikeji.ddmananger.ui.activity.LoginActivity;
 
 
 public class MainActivity extends BaseActivity {

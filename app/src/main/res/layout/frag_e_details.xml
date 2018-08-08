@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/frag_e_details_srl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <include layout="@layout/include_dev_details" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/margin_normal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/margin_normal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="权限管理"
+                        android:textColor="@color/text_black_color_5" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前权限:" />
+
+                        <TextView
+                            android:id="@+id/e_details_tv_power"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/text_red_color" />
+
+                        <TextView
+                            android:id="@+id/e_details_tv_p_manager"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s_bg_div"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="6dp"
+                            android:paddingRight="6dp"
+                            android:paddingTop="4dp"
+                            android:text="设备人员管理" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="电费统计" />
+
+                    <TextView
+                        android:id="@+id/e_details_tv_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:text="查看电量统计"
+                        android:textColor="@color/s_btn_blue_text" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGreen"
+                    android:paddingBottom="@dimen/margin_normal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/margin_normal">
+
+                    <TextView
+                        android:id="@+id/e_details_label_total_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_e_num"
+                        android:text="累计电量："
+                        android:textColor="@color/text_white_color" />
+
+                    <TextView
+                        android:id="@+id/e_details_tv_e_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@+id/e_details_label_total_num"
+                        android:text="0.00"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_e_num"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/e_details_tv_e_num"
+                        android:text="度"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/e_details_label_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_e_price"
+                        android:text="总费用："
+                        android:textColor="@color/text_white_color" />
+
+                    <TextView
+                        android:id="@+id/e_details_tv_e_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/e_details_tv_e_num"
+                        android:layout_below="@+id/e_details_label_total_num"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:layout_toRightOf="@+id/e_details_label_total_price"
+                        android:text="0.00"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_e_price"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/e_details_tv_e_price"
+                        android:text="元"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_blue_3"
+                    android:paddingBottom="@dimen/margin_normal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/margin_normal">
+
+                    <TextView
+                        android:id="@+id/e_details_label_month_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_month_e_num"
+                        android:text="本月电量："
+                        android:textColor="@color/text_white_color" />
+
+                    <TextView
+                        android:id="@+id/e_details_tv_month_e_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@+id/e_details_label_month_num"
+                        android:text="0.00"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_month_e_num"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/e_details_tv_month_e_num"
+                        android:text="度"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/e_details_label_month_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_e_month_price"
+                        android:text="总费用："
+                        android:textColor="@color/text_white_color" />
+
+                    <TextView
+                        android:id="@+id/e_details_tv_e_month_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/e_details_tv_month_e_num"
+                        android:layout_below="@+id/e_details_tv_month_e_num"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:text="0.00"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_e_month_price"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/e_details_tv_e_month_price"
+                        android:text="元"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/e_details_tv_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:text="4月"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/app_color_theme_8"
+                    android:paddingBottom="@dimen/margin_normal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/margin_normal">
+
+                    <TextView
+                        android:id="@+id/e_details_label_yeah_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_yeah_e_num"
+                        android:text="年度统计："
+                        android:textColor="@color/text_white_color" />
+
+                    <TextView
+                        android:id="@+id/e_details_tv_yeah_e_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@+id/e_details_label_yeah_num"
+                        android:text="0.00"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_yeah_e_num"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/e_details_tv_yeah_e_num"
+                        android:text="度"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/e_details_label_yeah_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_e_yeah_price"
+                        android:text="总费用："
+                        android:textColor="@color/text_white_color" />
+
+                    <TextView
+                        android:id="@+id/e_details_tv_e_yeah_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/e_details_tv_yeah_e_num"
+                        android:layout_below="@+id/e_details_tv_yeah_e_num"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:text="0.00"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/e_details_tv_e_yeah_price"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/e_details_tv_e_yeah_price"
+                        android:text="元"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/e_details_tv_yeah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:text="2018年"
+                        android:textColor="@color/text_white_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:text="基本信息"
+                    android:textColor="@color/text_black_color_5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/margin_normal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/margin_normal">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="电费单价:" />
+
+                        <TextView
+                            android:id="@+id/e_details_tv_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:textColor="@color/text_red_color" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="绑定日期:" />
+
+                        <TextView
+                            android:id="@+id/e_details_tv_bind_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/margin_normal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/margin_normal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="剩余金额:" />
+
+                    <TextView
+                        android:id="@+id/e_details_tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <com.qmuiteam.qmui.widget.QMUIEmptyView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite" />
+</FrameLayout>

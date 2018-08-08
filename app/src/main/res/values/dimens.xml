@@ -43,7 +43,7 @@
     <dimen name="my_house_label_width">70sp</dimen>
     <dimen name="my_house_text_size">12sp</dimen>
     <dimen name="dp_6">6dp</dimen>
-    <dimen name="bottom_button_height">46dp</dimen>
+    <dimen name="bottom_button_height">56dp</dimen>
     <dimen name="bottom_button_text_size">16sp</dimen>
 
 

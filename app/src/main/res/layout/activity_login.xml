@@ -1,9 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_white"
     tools:context=".ui.activity.LoginActivity">
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/activity_login_iv"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:src="@drawable/ic_launcher_background" />
+
+    <LinearLayout
+        android:id="@+id/activity_login_input_content_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_login_iv"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <EditText
+            android:id="@+id/activity_login_et_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/qmui_edittext_bg_border_bottom"
+            android:hint="请输入手机号"
+            android:padding="6dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/activity_login_et_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/qmui_edittext_bg_border_bottom"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:padding="6dp"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/activity_login_tv_login"
+        style="@style/btnNormal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_login_input_content_group"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@color/qmui_config_color_white" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/activity_login_tv_reg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/s_btn_hide"
+            android:clickable="true"
+            android:padding="6dp"
+            android:text="注册"
+            android:textColor="@color/text_hint_color" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/black" />
+
+        <TextView
+            android:id="@+id/activity_login_tv_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/s_btn_hide"
+            android:clickable="true"
+            android:padding="6dp"
+            android:text="忘记密码"
+            android:textColor="@color/text_hint_color" />
+    </LinearLayout>
+</RelativeLayout>

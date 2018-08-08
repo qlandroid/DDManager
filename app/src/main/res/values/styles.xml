@@ -85,6 +85,14 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="btnNormal">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textColor">@color/text_white_color</item>
+        <item name="android:background">@drawable/s_btn_radius_blue</item>
+        <item name="android:clickable">true</item>
+    </style>
+
     <style name="button_wrapper_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -101,104 +109,7 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_out_left</item>
     </style>
 
-    <style name="button_big_padding_style">
-        <item name="android:paddingLeft">20dp</item>
-        <item name="android:paddingRight">20dp</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
-    </style>
 
-    <style name="button_padding_style">
-        <item name="android:paddingTop">6dp</item>
-        <item name="android:paddingBottom">6dp</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-    </style>
-
-    <style name="button_blue_radius_style" parent="button_padding_style">
-        <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/slt_btn_blue_radius</item>
-    </style>
-
-    <style name="button_blue_style" parent="button_padding_style">
-        <item name="android:background">@drawable/slt_btn_blue</item>
-        <item name="android:clickable">true</item>
-    </style>
-
-    <style name="button_big_blue_style" parent="button_big_padding_style">
-        <item name="android:background">@drawable/slt_btn_blue</item>
-    </style>
-
-    <style name="button_normal_style" parent="button_padding_style">
-        <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/slt_btn_bg_white_div</item>
-    </style>
-
-    <style name="button_big_del_style" parent="button_big_padding_style">
-        <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/slt_btn_del_red</item>
-    </style>
-
-    <style name="house_details_label_style">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/text_label_color</item>
-    </style>
-
-    <style name="text_style">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/text_black_color</item>
-    </style>
-
-    <style name="house_details_text_style" parent="text_style">
-        <item name="android:layout_marginLeft">6dp</item>
-    </style>
-
-    <style name="house_details_label_text_style">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/text_label_color</item>
-    </style>
-
-    <style name="title_text_style">
-        <item name="android:textColor">@color/text_black_color</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="find_friend_label_style">
-        <item name="android:textColor">@color/text_black_color</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="div_y">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1px</item>
-        <item name="android:background">@color/div_color</item>
-    </style>
-
-    <style name="my_house_text_style">
-        <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="my_house_label_style" parent="my_house_text_style">
-        <item name="android:layout_width">80dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/text_label_color</item>
-    </style>
-
-    <style name="my_house_content_style" parent="my_house_text_style">
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:maxLines">2</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textColor">@color/text_black_color</item>
-    </style>
-
-    <style name="my_house_text_group_style">
-        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
-        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
-        <item name="android:paddingBottom">@dimen/margin_top_normal</item>
-        <item name="android:paddingTop">@dimen/margin_top_normal</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:gravity">center_vertical</item>
-    </style>
 
     <style name="menu_title_style">
         <item name="android:textSize">14sp</item>
