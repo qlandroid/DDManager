@@ -1,5 +1,6 @@
 package com.hayikeji.ddmananger.ui.fragment;
 
+import android.os.Bundle;
 import android.ql.bindview.BindView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -59,6 +60,14 @@ public class MyFragment extends BaseFragment {
     private GridAdapter gridNavAdapter = new GridAdapter();
     private MyNavAdapter myNavAdapter;
 
+    public static MyFragment newInstance() {
+        
+        Bundle args = new Bundle();
+        
+        MyFragment fragment = new MyFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Override
     protected void initData() {
         super.initData();

@@ -4,131 +4,183 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
     android:orientation="vertical"
-
     tools:context=".ui.activity.RegActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="账号:" />
-
-        <EditText
-            android:id="@+id/activity_reg_et_account"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qmui_edittext_bg_border_bottom"
-            android:hint="请输入账号"
-            android:inputType="number"
-            android:maxLength="10"
-            android:paddingBottom="6dp"
-            android:paddingLeft="8dp"
-            android:paddingTop="6dp"
-            android:textSize="16sp" />
-    </LinearLayout>
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+            <TextView
+                android:layout_width="56sp"
+                android:layout_height="wrap_content"
+                android:text="账号"
+                android:textSize="14sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="手机号:" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/activity_reg_et_phone"
+                <EditText
+                    android:id="@+id/activity_reg_et_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="请输入账号"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingBottom="@dimen/margin_normal"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/div_color" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qmui_edittext_bg_border_bottom"
-            android:hint="请输入手机号"
-            android:inputType="number"
-            android:maxLength="10"
-            android:paddingBottom="6dp"
-            android:paddingLeft="8dp"
-            android:paddingTop="6dp"
-            android:textSize="16sp" />
-    </LinearLayout>
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+            <TextView
+                android:layout_width="56sp"
+                android:layout_height="wrap_content"
+                android:text="手机号"
+                android:textSize="14sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="密码:" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/activity_reg_et_pw"
+                <EditText
+                    android:id="@+id/activity_reg_et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="请输入手机号"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingBottom="@dimen/margin_normal"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/div_color" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qmui_edittext_bg_border_bottom"
-            android:hint="请输入密码"
-            android:inputType="number"
-            android:maxLength="10"
-            android:paddingBottom="6dp"
-            android:paddingLeft="8dp"
-            android:paddingTop="6dp"
-            android:textSize="16sp" />
-    </LinearLayout>
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+            <TextView
+                android:layout_width="56sp"
+                android:layout_height="wrap_content"
+                android:text="密码"
+                android:textSize="14sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <EditText
+                    android:id="@+id/activity_reg_et_pw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="请输入密码"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingBottom="@dimen/margin_normal"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1px"
+                    android:background="@color/div_color" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="验证码:" />
+            android:layout_marginTop="@dimen/margin_normal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <EditText
-            android:id="@+id/activity_reg_et_msg_code"
-            android:layout_width="100sp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/qmui_edittext_bg_border_bottom"
-            android:hint="验证码"
-            android:inputType="number"
-            android:maxLength="10"
-            android:paddingBottom="6dp"
-            android:paddingLeft="8dp"
-            android:paddingTop="6dp"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="56sp"
+                android:layout_height="wrap_content"
+                android:text="验证码"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/activity_reg_tv_getMsgCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/s_btn_radius_blue"
-            android:clickable="true"
-            android:paddingBottom="6dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="6dp"
-            android:text="获取验证码"
-            android:textColor="@color/text_white_color" />
+            <EditText
+                android:id="@+id/activity_reg_et_msg_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:maxLength="10"
+                android:paddingBottom="@dimen/margin_normal"
+                android:paddingLeft="8dp"
+                android:paddingTop="@dimen/margin_normal"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/activity_reg_tv_getMsgCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:clickable="true"
+                android:paddingBottom="6dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="6dp"
+                android:text="获取验证码"
+                android:textColor="@color/s_text_theme_gray_select" />
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
@@ -136,9 +188,9 @@
         style="@style/btnNormal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="注册"
         android:textSize="16sp" />

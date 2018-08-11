@@ -1,12 +1,18 @@
 package com.hayikeji.ddmananger.ui.fragment;
 
+import android.graphics.Color;
+import android.os.Bundle;
 import android.ql.bindview.BindView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hayikeji.ddmananger.R;
@@ -17,6 +23,7 @@ import com.hayikeji.ddmananger.ui.adapter.IDevDetails;
 import com.hayikeji.ddmananger.ui.widget.dialog.BottomDevSelectDialog;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIKeyboardHelper;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -30,7 +37,7 @@ import java.util.List;
  *
  * @author ql
  */
-@BindLayout(layoutRes = R.layout.frag_e_details, title = "电量信息",backRes = 0)
+@BindLayout(layoutRes = R.layout.frag_e_details, title = "电量信息", backRes = 0)
 public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, BottomDevSelectDialog.OnSelectDevListener {
 
     @BindView(R.id.e_details_tv_bind_date)
@@ -76,7 +83,20 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
     @BindView(R.id.frag_e_details_srl)
     SwipeRefreshLayout srl;
 
-    BottomDevSelectDialog dialog;
+    private BottomDevSelectDialog dialog;
+    private IUnBindDev iUnBindDev;
+
+
+
+    public static EDetailsFragment newInstance(IUnBindDev iUnBindDev) {
+
+        Bundle args = new Bundle();
+
+        EDetailsFragment fragment = new EDetailsFragment();
+        fragment.setiUnBindDev(iUnBindDev);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected void initData() {
@@ -84,6 +104,7 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
         dialog = new BottomDevSelectDialog(getContext());
         dialog.setOnSelectDevListener(this);
     }
+
 
     @Override
     protected void initWidget(View view) {
@@ -95,6 +116,22 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
         tvSettingName.setOnClickListener(this);
         tvSummary.setOnClickListener(this);
         hideEmptyView();
+        /*LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mTopbar.getLayoutParams();
+        layoutParams.topMargin = QMUIStatusBarHelper.getStatusbarHeight(getContext());
+        mTopbar.setLayoutParams(layoutParams);*/
+        ViewParent parent = mTopbar.getParent();
+        ViewGroup parentView = (ViewGroup) parent;
+        View v = new View(getContext());
+        LinearLayout.LayoutParams l = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,QMUIStatusBarHelper.getStatusbarHeight(getContext()));
+
+        v.setLayoutParams(l);
+        v.setBackgroundColor(Color.RED);
+        parentView.addView(v,0);
+    }
+
+
+    public void setiUnBindDev(IUnBindDev iUnBindDev) {
+        this.iUnBindDev = iUnBindDev;
     }
 
     private void emptyViewLoading() {
@@ -116,11 +153,12 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
     }
 
     private void toUnBindDevContent() {
-        FragmentActivity activity = getActivity();
-        if (activity instanceof IUnBindDev) {
-            ((IUnBindDev) activity).changeUnbindFragment();
+        if (iUnBindDev == null) {
+            return;
         }
+        iUnBindDev.changeUnbindFragment();
     }
+
 
     @Override
     public void widgetClick(View v) {
@@ -147,17 +185,17 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
         editTextDialogBuilder.setTitle("设备名称设置")
                 .setPlaceholder("请输入设备名称")
                 .addAction("确定", new QMUIDialogAction.ActionListener() {
-            @Override
-            public void onClick(QMUIDialog dialog, int index) {
-                Editable text = editText.getText();
-                tvName.setText(text);
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        Editable text = editText.getText();
+                        tvName.setText(text);
 
-                if (QMUIKeyboardHelper.isKeyboardVisible(getActivity())) {
-                    QMUIKeyboardHelper.hideKeyboard(editText);
-                }
-                dialog.cancel();
-            }
-        }).addAction("取消", new QMUIDialogAction.ActionListener() {
+                        if (QMUIKeyboardHelper.isKeyboardVisible(getActivity())) {
+                            QMUIKeyboardHelper.hideKeyboard(editText);
+                        }
+                        dialog.cancel();
+                    }
+                }).addAction("取消", new QMUIDialogAction.ActionListener() {
             @Override
             public void onClick(QMUIDialog dialog, int index) {
                 FragmentActivity activity = getActivity();

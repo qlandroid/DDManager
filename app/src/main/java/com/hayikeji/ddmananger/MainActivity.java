@@ -12,7 +12,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(HomeActivity.class);
+        startActivity(LoginActivity.class);
         finish();
     }
 }

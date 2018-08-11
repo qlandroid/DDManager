@@ -7,7 +7,7 @@
     <color name="colorWhite">#fff</color>
     <color name="colorWhiteSelect">#cccccc</color>
     <color name="colorBlack">#000</color>
-    <color name="div_color">#e9e9e9</color>
+    <color name="div_color">#f1f1f1</color>
     <color name="colorGreen">#339900</color>
     <color name="colorGreen_0">#93cfa6</color>
     <color name="colorGreen_1">#6fc78b</color>
@@ -97,4 +97,16 @@
     <color name="input_id_card_info">#f0f0f0</color>
     <color name="horizontal_line">#eeeeee</color>
     <color name="transparent">#55000000</color>
+
+    <color name="color_theme">#04c9c8</color>
+    <color name="color_theme_press">#03b4b3</color>
+    <color name="color_cutting_line">#f1f1f1</color>
+    <color name="color_cutting_line2">#f2f2f2</color>
+    <color name="color_background">#f1f1f1</color>
+    <color name="color_number_3">#333</color>
+    <color name="color_number_5">#555</color>
+    <color name="color_number_9">#999</color>
+    <color name="color_number_c6">#c6c6c6</color>
+    <color name="color_red">#ff3833</color>
+    <color name="color_blue">#2e79e7</color>
 </resources>

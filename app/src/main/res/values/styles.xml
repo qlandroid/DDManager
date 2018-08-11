@@ -11,9 +11,10 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/color_theme</item>
+        <item name="colorPrimaryDark">@color/color_theme</item>
+        <item name="colorAccent">@color/color_theme</item>
+
         <!--   <item name="android:windowIsTranslucent">true</item>-->
         <item name="android:windowSoftInputMode">adjustPan|stateHidden</item>
         <item name="android:windowBackground">@color/colorGray</item>
@@ -32,10 +33,12 @@
         <item name="qmui_content_spacing_horizontal">20dp</item>
         <item name="qmui_content_padding_horizontal">@dimen/qmui_content_spacing_horizontal</item>
         <item name="QMUITopBarStyle">@style/QDTopBar</item>
-
+        <item name="android:textColorHint">@color/color_number_c6</item>
+        <item name="android:textColor">@color/color_number_3</item>
         <!--自定义样式-->
         <!--<item name="android:background">@drawable/slt_btn_hide</item>-->
         <item name="android:ellipsize">end</item>
+        <item name="android:textColorHighlight">@color/color_theme</item>
     </style>
 
     <style name="QDtextAppearanceListItem">
@@ -108,7 +111,6 @@
         <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_out_left</item>
     </style>
-
 
 
     <style name="menu_title_style">

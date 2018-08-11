@@ -20,7 +20,6 @@
         android:layout_below="@id/activity_login_iv"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:orientation="vertical"
         android:padding="20dp">
 
@@ -28,21 +27,32 @@
             android:id="@+id/activity_login_et_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qmui_edittext_bg_border_bottom"
+            android:background="@null"
             android:hint="请输入手机号"
-            android:padding="6dp"
-            android:textSize="16sp" />
+            android:paddingBottom="@dimen/margin_normal"
+            android:paddingTop="@dimen/margin_normal"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/div_color" />
 
         <EditText
             android:id="@+id/activity_login_et_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/qmui_edittext_bg_border_bottom"
+            android:background="@null"
             android:hint="请输入密码"
             android:inputType="textPassword"
-            android:padding="6dp"
-            android:textSize="16sp" />
+            android:paddingTop="@dimen/margin_normal"
+            android:paddingBottom="@dimen/margin_normal"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/div_color" />
     </LinearLayout>
 
     <TextView

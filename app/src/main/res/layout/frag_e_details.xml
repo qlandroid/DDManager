@@ -399,6 +399,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_vertical_margin"/>
             </LinearLayout>
         </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>

@@ -40,6 +40,9 @@ public class ForgetActivity extends BaseActivity {
         super.forbidClick(v);
         switch (v.getId()) {
             case R.id.activity_forget_tv_getMsgCode:
+                boolean selected = !v.isSelected();
+                v.setSelected(selected);
+
                 String phone = etPhone.getText().toString();
                 if (!CheckUtils.isMobileNO(phone)) {
                     return;

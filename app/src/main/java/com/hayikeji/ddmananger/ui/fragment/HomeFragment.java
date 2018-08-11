@@ -1,5 +1,6 @@
 package com.hayikeji.ddmananger.ui.fragment;
 
+import android.os.Bundle;
 import android.ql.bindview.BindView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
@@ -48,6 +49,15 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     private GridAdapter navAdapter = new GridAdapter();
     private HomeContentAdapter homeContentAdapter = new HomeContentAdapter();
+
+    public static HomeFragment newInstance() {
+        
+        Bundle args = new Bundle();
+        
+        HomeFragment fragment = new HomeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected void initWidget(View view) {
