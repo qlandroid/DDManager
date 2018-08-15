@@ -185,7 +185,7 @@
 
     <TextView
         android:id="@+id/activity_reg_tv_reg"
-        style="@style/btnNormal"
+        style="@style/btnNormalRadius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"

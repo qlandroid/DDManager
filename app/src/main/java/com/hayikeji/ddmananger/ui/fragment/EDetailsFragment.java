@@ -105,7 +105,6 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
         dialog.setOnSelectDevListener(this);
     }
 
-
     @Override
     protected void initWidget(View view) {
         super.initWidget(view);

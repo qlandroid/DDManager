@@ -29,7 +29,7 @@ public interface IDevDetails {
      *
      * @return
      */
-    CharSequence getDevDoor();
+    CharSequence getDevRoom();
 
     /**
      * 设备所有人

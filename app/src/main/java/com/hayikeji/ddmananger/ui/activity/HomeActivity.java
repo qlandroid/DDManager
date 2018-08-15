@@ -11,6 +11,7 @@ import com.hayikeji.ddmananger.base.BaseActivity;
 import com.hayikeji.ddmananger.base.BaseFragment;
 import com.hayikeji.ddmananger.base.BindLayout;
 import com.hayikeji.ddmananger.ui.fragment.EDetailsFragment;
+import com.hayikeji.ddmananger.ui.fragment.EMsgFragment;
 import com.hayikeji.ddmananger.ui.fragment.HomeFragment;
 import com.hayikeji.ddmananger.ui.fragment.IUnBindDev;
 import com.hayikeji.ddmananger.ui.fragment.MyFragment;
@@ -52,7 +53,7 @@ public class HomeActivity extends BaseActivity implements IUnBindDev {
         super.initData();
         fragments.add(HomeFragment.newInstance());
         fragments.add(EDetailsFragment.newInstance(this));
-        fragments.add(EDetailsFragment.newInstance(this));
+        fragments.add(EMsgFragment.newInstance());
         fragments.add(EDetailsFragment.newInstance(this));
         fragments.add(MyFragment.newInstance());
     }

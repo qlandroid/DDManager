@@ -21,7 +21,7 @@ public class DevSelectAdapter extends BaseQuickAdapter<IDevDetails, QLViewHolder
     protected void convert(QLViewHolder helper, IDevDetails item) {
         helper.setText(R.id.item_dev_select_tv_no, item.getDevNo())
                 .setText(R.id.item_dev_select_tv_name, item.getDevName())
-                .setText(R.id.item_dev_select_tv_door, item.getDevDoor())
+                .setText(R.id.item_dev_select_tv_door, item.getDevRoom())
                 .setText(R.id.item_dev_select_tv_owner, item.getDevOwner());
     }
 }

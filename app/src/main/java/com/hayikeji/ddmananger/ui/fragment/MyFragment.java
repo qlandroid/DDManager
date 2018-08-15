@@ -14,6 +14,7 @@ import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseFragment;
 import com.hayikeji.ddmananger.base.BindLayout;
 import com.hayikeji.ddmananger.ui.IGrid;
+import com.hayikeji.ddmananger.ui.activity.EManagerActivity;
 import com.hayikeji.ddmananger.ui.adapter.GridAdapter;
 import com.hayikeji.ddmananger.ui.adapter.INav;
 import com.hayikeji.ddmananger.ui.adapter.MyNavAdapter;
@@ -90,6 +91,7 @@ public class MyFragment extends BaseFragment {
                     case NAV_MENU_MY_DEV:
                         break;
                     case NAV_MENU_CONTROL_DEV:
+                        startActivity(EManagerActivity.class);
                         break;
                     case NAV_MENU_USER_DETAILS:
                         break;

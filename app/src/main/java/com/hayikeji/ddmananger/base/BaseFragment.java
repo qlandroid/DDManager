@@ -14,6 +14,7 @@ import android.ql.bindview.BindViewUtils;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 public abstract class BaseFragment extends Fragment implements View.OnClickListener ,IDialog{
     private final int REQUEST_CHOOSE_PHOTO = 22;//点击头像切换头像
     public QMUITopBar mTopbar;
+    private BaseFragment currentKJFragment;
 
     @Nullable
     @Override
@@ -270,6 +272,30 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         return path;
     }
 
+
+    /***********************************************************************/
+
+    public void myChangeFragment(int resView, BaseFragment targetFragment) {
+        if (targetFragment.equals(currentKJFragment)) {
+            return;
+        }
+        FragmentTransaction transaction = getFragmentManager()
+                .beginTransaction();
+        if (!targetFragment.isAdded()) {
+            transaction.add(resView, targetFragment, targetFragment.getClass()
+                    .getName());
+        }
+        if (targetFragment.isHidden()) {
+            transaction.show(targetFragment);
+            targetFragment.onChange();
+        }
+        if (currentKJFragment != null && currentKJFragment.isVisible()) {
+            transaction.hide(currentKJFragment);
+        }
+        currentKJFragment = targetFragment;
+        transaction.commit();
+
+    }
 
 
 

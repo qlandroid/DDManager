@@ -29,7 +29,7 @@ public class BottomDevSelectDialog implements BaseQuickAdapter.OnItemClickListen
         init(context);
     }
 
-    public void init(Context context) {
+    private void init(Context context) {
         View selectViewGroup = LayoutInflater.from(context).inflate(R.layout.dialog_dev_select, null);
         selectViewGroup.findViewById(R.id.dialog_dev_select_iv_cancel).setOnClickListener(new View.OnClickListener() {
             @Override

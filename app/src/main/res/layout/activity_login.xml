@@ -57,7 +57,7 @@
 
     <TextView
         android:id="@+id/activity_login_tv_login"
-        style="@style/btnNormal"
+        style="@style/btnNormalRadius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/activity_login_input_content_group"

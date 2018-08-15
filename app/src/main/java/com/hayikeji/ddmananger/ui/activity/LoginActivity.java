@@ -36,7 +36,8 @@ public class LoginActivity extends BaseActivity {
         tvReg.setOnClickListener(this);
         tvForget.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
-
+        etAccount.setText("15601953393");
+        etPw.setText("123456");
     }
 
 

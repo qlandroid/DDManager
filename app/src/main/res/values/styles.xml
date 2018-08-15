@@ -38,6 +38,7 @@
         <!--自定义样式-->
         <!--<item name="android:background">@drawable/slt_btn_hide</item>-->
         <item name="android:ellipsize">end</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColorHighlight">@color/color_theme</item>
     </style>
 
@@ -88,11 +89,25 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="btnNormal">
+    <style name="btnNormalRadius">
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
         <item name="android:textColor">@color/text_white_color</item>
         <item name="android:background">@drawable/s_btn_radius_blue</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <style name="btnNormal">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textColor">@color/text_white_color</item>
+        <item name="android:background">@drawable/s_btn_blue</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <style name="btnDel">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textColor">@color/text_white_color</item>
+        <item name="android:background">@drawable/s_btn_del</item>
         <item name="android:clickable">true</item>
     </style>
 

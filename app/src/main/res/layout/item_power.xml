@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_normal"
+    android:background="@color/colorWhite"
+    android:paddingBottom="@dimen/margin_normal"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/margin_normal">
+
+    <TextView
+        android:id="@+id/item_power_name_label"
+        android:layout_width="56sp"
+        android:layout_height="wrap_content"
+        android:text="姓名" />
+
+    <TextView
+        android:id="@+id/item_power_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/item_power_name_label" />
+
+    <TextView
+        android:id="@+id/item_power_phone_label"
+        android:layout_width="56sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_power_name_label"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="手机号" />
+
+    <TextView
+        android:id="@+id/item_power_tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/item_power_phone_label"
+        android:layout_toRightOf="@+id/item_power_phone_label" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="权限:" />
+
+        <TextView
+            android:id="@+id/item_power_tv_power"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:text="0级" />
+    </LinearLayout>
+
+    <TextView
+        android:clickable="false"
+        android:id="@+id/item_power_tv_setting"
+        style="@style/btnNormalRadius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/item_power_phone_label"
+        android:padding="4dp"
+        android:text="权限分配" />
+
+</RelativeLayout>
