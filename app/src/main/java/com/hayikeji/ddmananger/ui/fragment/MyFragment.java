@@ -15,6 +15,9 @@ import com.hayikeji.ddmananger.base.BaseFragment;
 import com.hayikeji.ddmananger.base.BindLayout;
 import com.hayikeji.ddmananger.ui.IGrid;
 import com.hayikeji.ddmananger.ui.activity.EManagerActivity;
+import com.hayikeji.ddmananger.ui.activity.MyDevListActivity;
+import com.hayikeji.ddmananger.ui.activity.PayEActivity;
+import com.hayikeji.ddmananger.ui.activity.PayVipActivity;
 import com.hayikeji.ddmananger.ui.adapter.GridAdapter;
 import com.hayikeji.ddmananger.ui.adapter.INav;
 import com.hayikeji.ddmananger.ui.adapter.MyNavAdapter;
@@ -29,7 +32,7 @@ import java.util.List;
  *
  * @author ql
  */
-@BindLayout(layoutRes = R.layout.frag_my ,bindTopBar = false)
+@BindLayout(layoutRes = R.layout.frag_my, bindTopBar = false)
 public class MyFragment extends BaseFragment {
 
     private static final int NAV_MENU_MY_DEV = 2;
@@ -62,13 +65,14 @@ public class MyFragment extends BaseFragment {
     private MyNavAdapter myNavAdapter;
 
     public static MyFragment newInstance() {
-        
+
         Bundle args = new Bundle();
-        
+
         MyFragment fragment = new MyFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     protected void initData() {
         super.initData();
@@ -89,6 +93,7 @@ public class MyFragment extends BaseFragment {
                 IGrid o = (IGrid) adapter.getData().get(position);
                 switch (o.getTag()) {
                     case NAV_MENU_MY_DEV:
+                        startActivity(MyDevListActivity.class);
                         break;
                     case NAV_MENU_CONTROL_DEV:
                         startActivity(EManagerActivity.class);
@@ -149,10 +154,12 @@ public class MyFragment extends BaseFragment {
                     case NAV_MENU_E_ADD:
                         break;
                     case NAV_MENU_E_PAY:
+                        startActivity(PayEActivity.class);
                         break;
                     case NAV_MENU_E_RECORD:
                         break;
                     case NAV_MENU_VIP:
+                        startActivity(PayVipActivity.class);
                         break;
                 }
             }

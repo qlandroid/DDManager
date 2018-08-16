@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.R;
@@ -22,12 +23,14 @@ import java.util.List;
 
 @BindLayout(layoutRes = R.layout.activity_my_dev_list, title = "我的设备")
 public class MyDevListActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
-    @BindView(R.id.activity_emanager_et_dev_code)
+    @BindView(R.id.activity_my_dev_list_et_dev_code)
     EditText etDevCode;
-    @BindView(R.id.activity_emanager_to_query)
+    @BindView(R.id.activity_my_dev_list_to_query)
     View vQuery;
-    @BindView(R.id.activity_emanager_rv)
+    @BindView(R.id.activity_my_dev_list_rv)
     RecyclerView rv;
+    @BindView(R.id.activity_my_dev_list_tv_dev_count)
+    TextView tvDevCount;
 
     private ECloseManagerAdapter adapter;
 
@@ -44,7 +47,7 @@ public class MyDevListActivity extends BaseActivity implements BaseQuickAdapter.
         adapter.setOnItemClickListener(this);
         List<IECloseManager> l = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            l.add(new EManagerActivity.EDate());
+            l.add(new EDate());
         }
         adapter.setNewData(l);
         adapter.notifyDataSetChanged();
@@ -76,6 +79,16 @@ public class MyDevListActivity extends BaseActivity implements BaseQuickAdapter.
         @Override
         public boolean isRun() {
             return true;
+        }
+
+        @Override
+        public boolean isShowPower() {
+            return false;
+        }
+
+        @Override
+        public boolean isShowSwitch() {
+            return false;
         }
 
         @Override

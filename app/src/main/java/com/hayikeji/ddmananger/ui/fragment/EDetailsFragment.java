@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseFragment;
 import com.hayikeji.ddmananger.base.BindLayout;
+import com.hayikeji.ddmananger.ui.activity.DevListSelectActivity;
 import com.hayikeji.ddmananger.ui.activity.HomeActivity;
 import com.hayikeji.ddmananger.ui.adapter.IDevDetails;
 import com.hayikeji.ddmananger.ui.widget.dialog.BottomDevSelectDialog;
@@ -171,7 +172,8 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
                 displaySettingNameDialog();
                 break;
             case R.id.top_bar_right_btn://点击选择设备
-                dialog.show();
+               //dialog.show();
+                startActivity(DevListSelectActivity.class);
                 break;
         }
     }

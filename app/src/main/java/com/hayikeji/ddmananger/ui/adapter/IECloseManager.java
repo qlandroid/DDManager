@@ -26,4 +26,8 @@ public interface IECloseManager extends IDevDetails {
     boolean isCanSwitch();
 
     boolean isRun();
+
+    boolean isShowPower();
+
+    boolean isShowSwitch();
 }

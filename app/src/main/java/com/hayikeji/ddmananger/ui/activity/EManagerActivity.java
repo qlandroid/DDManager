@@ -73,6 +73,16 @@ public class EManagerActivity extends BaseActivity implements BaseQuickAdapter.O
         }
 
         @Override
+        public boolean isShowPower() {
+            return false;
+        }
+
+        @Override
+        public boolean isShowSwitch() {
+            return false;
+        }
+
+        @Override
         public CharSequence getDevNo() {
             return "123";
         }

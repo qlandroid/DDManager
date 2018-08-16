@@ -71,7 +71,10 @@
         <activity android:name=".ui.activity.PowerManagerActivity" />
         <activity android:name=".ui.activity.EManagerActivity" />
         <activity android:name=".ui.activity.MyDevListActivity" />
-        <activity android:name=".ui.activity.DevListSelectActivity"></activity>
+        <activity android:name=".ui.activity.DevListSelectActivity" />
+        <activity android:name=".ui.activity.PayEActivity" />
+        <activity android:name=".ui.activity.PayRecordActivity" />
+        <activity android:name=".ui.activity.PayVipActivity"></activity>
     </application>
 
 </manifest>
