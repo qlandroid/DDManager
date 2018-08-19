@@ -33,7 +33,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
  * Created by mrqiu on 2017/10/2.
  */
 
-public abstract class BaseFragment extends Fragment implements View.OnClickListener ,IDialog{
+public abstract class BaseFragment extends Fragment implements View.OnClickListener, IDialog {
     private final int REQUEST_CHOOSE_PHOTO = 22;//点击头像切换头像
     public QMUITopBar mTopbar;
     private BaseFragment currentKJFragment;
@@ -42,7 +42,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutUtils.bind(this);
-        LayoutUtils.bindFragmentTopbar(this,view);
+        LayoutUtils.bindFragmentTopbar(this, view);
         BindViewUtils.find(this, view);
         return view;
     }
@@ -101,15 +101,17 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
 
-    public void setTextView(String s, TextView tv) {
+    public BaseFragment setTextView(CharSequence s, TextView tv) {
         setTextView(s, "", tv);
+        return this;
     }
 
-    public void setTextView(String s, String normal, TextView tv) {
+    public BaseFragment setTextView(CharSequence s, String normal, TextView tv) {
         if (TextUtils.isEmpty(s)) {
             s = normal;
         }
         tv.setText(s);
+        return this;
     }
 
     @Override
@@ -121,49 +123,49 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @Override
     public void displayLoadingDialog(CharSequence msg) {
         FragmentActivity activity = getActivity();
-        if (activity instanceof IDialog)((IDialog) activity).displayLoadingDialog(msg);
+        if (activity instanceof IDialog) ((IDialog) activity).displayLoadingDialog(msg);
     }
 
     @Override
     public void cancelLoadingDialog() {
         FragmentActivity activity = getActivity();
-        if (activity instanceof IDialog)((IDialog) activity).cancelLoadingDialog();
+        if (activity instanceof IDialog) ((IDialog) activity).cancelLoadingDialog();
     }
 
     @Override
     public void displayTipDialogFail(CharSequence msg, long l) {
         FragmentActivity activity = getActivity();
-        if (activity instanceof IDialog)((IDialog) activity).displayTipDialogFail(msg,l);
+        if (activity instanceof IDialog) ((IDialog) activity).displayTipDialogFail(msg, l);
     }
 
     @Override
     public void displayTipDialogFail(CharSequence msg) {
         FragmentActivity activity = getActivity();
-        if (activity instanceof IDialog)((IDialog) activity).displayTipDialogFail(msg);
+        if (activity instanceof IDialog) ((IDialog) activity).displayTipDialogFail(msg);
     }
 
     @Override
     public void cancelTipDialogFail() {
         FragmentActivity activity = getActivity();
-        if (activity instanceof IDialog)((IDialog) activity).cancelTipDialogFail();
+        if (activity instanceof IDialog) ((IDialog) activity).cancelTipDialogFail();
     }
 
     @Override
     public void cancelTipDialogSuccess() {
         FragmentActivity activity = getActivity();
-        if (activity instanceof IDialog)((IDialog) activity).cancelTipDialogSuccess();
+        if (activity instanceof IDialog) ((IDialog) activity).cancelTipDialogSuccess();
     }
 
     @Override
     public void displayTipDialogSuccess(CharSequence msg, long l) {
         FragmentActivity activity = getActivity();
-        if (activity instanceof IDialog)((IDialog) activity).displayTipDialogSuccess(msg,l);
+        if (activity instanceof IDialog) ((IDialog) activity).displayTipDialogSuccess(msg, l);
     }
 
     @Override
     public void displayTipDialogSuccess(CharSequence msg) {
         FragmentActivity activity = getActivity();
-        if (activity instanceof IDialog)((IDialog) activity).displayTipDialogSuccess(msg);
+        if (activity instanceof IDialog) ((IDialog) activity).displayTipDialogSuccess(msg);
     }
 
     @Override
@@ -177,7 +179,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public void displayMessageDialog(CharSequence msg, boolean isCancel) {
         FragmentActivity activity = getActivity();
         if (activity instanceof IDialog) {
-            ((IDialog) activity).displayMessageDialog(msg,isCancel);
+            ((IDialog) activity).displayMessageDialog(msg, isCancel);
         }
     }
 
@@ -185,7 +187,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public void displayMessageDialog(CharSequence msg, String action, QMUIDialogAction.ActionListener l) {
         FragmentActivity activity = getActivity();
         if (activity instanceof IDialog) {
-            ((IDialog) activity).displayMessageDialog(msg,action,l);
+            ((IDialog) activity).displayMessageDialog(msg, action, l);
         }
     }
 
@@ -193,7 +195,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public void toast(CharSequence msg) {
         FragmentActivity activity = getActivity();
         if (activity instanceof IDialog) {
-           ((IDialog) activity).toast(msg);
+            ((IDialog) activity).toast(msg);
         }
     }
 
@@ -296,7 +298,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         transaction.commit();
 
     }
-
 
 
 }

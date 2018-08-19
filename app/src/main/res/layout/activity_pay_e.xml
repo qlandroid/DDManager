@@ -165,27 +165,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:background="@color/colorWhite"
-                android:paddingBottom="@dimen/margin_normal"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/margin_normal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="电费单价" />
-
-                <TextView
-                    android:id="@+id/activity_pay_e_tv_unit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -251,17 +230,39 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/margin_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
                 android:background="@color/colorWhite"
-                android:orientation="vertical"
+                android:paddingBottom="@dimen/margin_normal"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin">
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/margin_normal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="电费单价" />
+
+                <TextView
+                    android:id="@+id/activity_pay_e_tv_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:paddingBottom="@dimen/margin_normal"
                     android:paddingTop="@dimen/margin_normal"
                     android:text="充值方式" />
@@ -269,13 +270,24 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:background="@color/div_color" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/activity_pay_e_rv"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/activity_pay_e_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
             </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/activity_vertical_margin" />
         </LinearLayout>
     </ScrollView>
 

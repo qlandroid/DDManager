@@ -11,8 +11,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseActivity;
 import com.hayikeji.ddmananger.base.BindLayout;
-import com.hayikeji.ddmananger.ui.adapter.IDevDetails;
-import com.hayikeji.ddmananger.ui.adapter.IPower;
+import com.hayikeji.ddmananger.ui.adapter.bean.IDevDetails;
+import com.hayikeji.ddmananger.ui.adapter.bean.IPower;
 import com.hayikeji.ddmananger.ui.adapter.PowerManagerAdapter;
 import com.hayikeji.ddmananger.ui.widget.dialog.BottomDevSelectDialog;
 
@@ -63,10 +63,8 @@ public class PowerManagerActivity extends BaseActivity implements BaseQuickAdapt
         super.forbidClick(v);
         switch (v.getId()) {
             case R.id.activity_power_manager_tv_select_dev://选择设备
-                BottomDevSelectDialog d = new BottomDevSelectDialog(this);
-                d.setDevList(null);
-                d.setOnSelectDevListener(this);
-                d.show();
+                startActivity(DevListSelectActivity.class);
+
                 break;
             case R.id.activity_power_manager_tv_query://查询
                 break;

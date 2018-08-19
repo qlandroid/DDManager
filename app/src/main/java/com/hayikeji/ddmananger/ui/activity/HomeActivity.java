@@ -10,11 +10,11 @@ import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseActivity;
 import com.hayikeji.ddmananger.base.BaseFragment;
 import com.hayikeji.ddmananger.base.BindLayout;
-import com.hayikeji.ddmananger.ui.fragment.EDetailsFragment;
-import com.hayikeji.ddmananger.ui.fragment.EMsgFragment;
-import com.hayikeji.ddmananger.ui.fragment.HomeFragment;
+import com.hayikeji.ddmananger.ui.fragment.home.EDetailsFragment;
+import com.hayikeji.ddmananger.ui.fragment.home.EMsgFragment;
+import com.hayikeji.ddmananger.ui.fragment.home.HomeFragment;
 import com.hayikeji.ddmananger.ui.fragment.IUnBindDev;
-import com.hayikeji.ddmananger.ui.fragment.MyFragment;
+import com.hayikeji.ddmananger.ui.fragment.home.MyFragment;
 import com.hayikeji.ddmananger.ui.fragment.UnBindDevFragment;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
@@ -53,8 +53,8 @@ public class HomeActivity extends BaseActivity implements IUnBindDev {
         super.initData();
         fragments.add(HomeFragment.newInstance());
         fragments.add(EDetailsFragment.newInstance(this));
-        fragments.add(EMsgFragment.newInstance());
         fragments.add(EDetailsFragment.newInstance(this));
+        fragments.add(EMsgFragment.newInstance());
         fragments.add(MyFragment.newInstance());
     }
 

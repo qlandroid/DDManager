@@ -1,4 +1,4 @@
-package com.hayikeji.ddmananger.ui.fragment;
+package com.hayikeji.ddmananger.ui.fragment.home;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -17,12 +17,11 @@ import android.widget.LinearLayout;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseFragment;
 import com.hayikeji.ddmananger.base.BindLayout;
-import com.qmuiteam.qmui.util.QMUIDrawableHelper;
-import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUIPagerAdapter;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,6 +59,24 @@ public class EMsgFragment extends BaseFragment {
     private class TabMenuAdapter extends QMUIPagerAdapter {
         private FragmentTransaction mCurrentTransaction;
         private Fragment mCurrentPrimaryItem = null;
+        private List<BaseFragment> list = new ArrayList<>();
+
+        public TabMenuAdapter() {
+            /**
+             *   case 0:
+             return PayMsgFragment.newInstance();
+             case 1:
+             return WarnMsgFragment.newInstance();
+             case 2:
+             return MsgFragment.newInstance("0");
+             case 3:
+             return MsgFragment.newInstance("1");
+             */
+            list.add(PayMsgFragment.newInstance());
+            list.add(WarnMsgFragment.newInstance());
+            list.add(MsgFragment.newInstance("0"));
+            list.add(MsgFragment.newInstance("1"));
+        }
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
@@ -95,20 +112,7 @@ public class EMsgFragment extends BaseFragment {
 
         @Override
         protected Object hydrate(ViewGroup container, int position) {
-            switch (position) {
-                case 0:
-                    return MsgFragment.newInstance(1);
-                case 1:
-                    return MsgFragment.newInstance(2);
-                case 2:
-                    return MsgFragment.newInstance(3);
-                case 3:
-                    return MsgFragment.newInstance(4);
-                case 4:
-                    return MsgFragment.newInstance(5);
-                default:
-                    return MsgFragment.newInstance(7);
-            }
+            return list.get(position);
         }
 
         @SuppressLint("CommitTransaction")
@@ -184,18 +188,22 @@ public class EMsgFragment extends BaseFragment {
     @Override
     protected void initWidget(View view) {
         super.initWidget(view);
+        initTopbar();
+
+        initTabAndPager();
+
+
+    }
+
+    private void initTopbar() {
         ViewParent parent = mTopbar.getParent();
         ViewGroup parentView = (ViewGroup) parent;
         View v = new View(getContext());
         LinearLayout.LayoutParams l = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, QMUIStatusBarHelper.getStatusbarHeight(getContext()));
 
         v.setLayoutParams(l);
-        v.setBackgroundColor(Color.RED);
+        v.setBackgroundColor(Color.WHITE);
         parentView.addView(v, 0);
-
-        initTabAndPager();
-
-
     }
 
     private void initTabAndPager() {

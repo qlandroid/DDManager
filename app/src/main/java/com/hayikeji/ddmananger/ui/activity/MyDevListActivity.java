@@ -12,14 +12,26 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseActivity;
 import com.hayikeji.ddmananger.base.BindLayout;
+import com.hayikeji.ddmananger.bean.BaseResult;
+import com.hayikeji.ddmananger.bean.DevDetails;
+import com.hayikeji.ddmananger.bean.DeviceBean;
+import com.hayikeji.ddmananger.http.OkHttpHeader;
+import com.hayikeji.ddmananger.http.OkHttpHelper;
+import com.hayikeji.ddmananger.http.ResultCallback2;
+import com.hayikeji.ddmananger.info.UrlApi;
 import com.hayikeji.ddmananger.ui.adapter.ECloseManagerAdapter;
-import com.hayikeji.ddmananger.ui.adapter.IECloseManager;
+import com.hayikeji.ddmananger.ui.adapter.bean.ECloseManager;
+import com.hayikeji.ddmananger.ui.adapter.bean.IECloseManager;
 import com.hayikeji.ddmananger.ui.widget.dialog.DevDetailsDialog;
 import com.hayikeji.ddmananger.ui.widget.dialog.EManagerDialog;
+import com.hayikeji.ddmananger.utils.DataUtils;
 import com.hayikeji.ddmananger.utils.div.DividerItemDecoration;
+import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @BindLayout(layoutRes = R.layout.activity_my_dev_list, title = "我的设备")
 public class MyDevListActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
@@ -45,149 +57,72 @@ public class MyDevListActivity extends BaseActivity implements BaseQuickAdapter.
         rv.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL, 20, Color.GRAY));
 
         adapter.setOnItemClickListener(this);
-        List<IECloseManager> l = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            l.add(new EDate());
+
+        refresh(null);
+    }
+
+    private void refresh(String code) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", UserDevPreferences.getUserId(this));
+        if (code != null) {
+            map.put("code", code);
         }
-        adapter.setNewData(l);
-        adapter.notifyDataSetChanged();
+        OkHttpHeader.post(UrlApi.dev_list, map, new ResultCallback2() {
+            @Override
+            protected void onFailed(String error, int code) {
+                cancelLoadingDialog();
+                displayMessageDialog(error);
+            }
+
+            @Override
+            protected void onSuccess(BaseResult response, int id) {
+                cancelLoadingDialog();
+                if (!response.isSuccess()) {
+                    displayMessageDialog(response.getMessage());
+                    return;
+                }
+
+                ArrayList<DeviceBean> arrayResult = DataUtils.getArrayResult(response.getList(), DeviceBean.class);
+                if (arrayResult == null || arrayResult.size() == 0) {
+                    adapter.setNewData(null);
+                    adapter.notifyDataSetChanged();
+                    tvDevCount.setText("0");
+                    return;
+                }
+                tvDevCount.setText(arrayResult.size() + "");
+                ArrayList<IECloseManager> l = new ArrayList<>();
+                for (DeviceBean deviceBean : arrayResult) {
+                    l.add(new ECloseManager(deviceBean));
+                }
+                adapter.setNewData(l);
+                adapter.notifyDataSetChanged();
+
+            }
+        });
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         DevDetailsDialog dialog = new DevDetailsDialog(this);
+        ECloseManager o = (ECloseManager) adapter.getData().get(position);
+        DevDetails devDetails = new DevDetails();
+
+        dialog.resetView(o.getDeviceBean());
         dialog.show();
     }
 
-    public static class EDate implements IECloseManager {
-
-        @Override
-        public CharSequence getPower() {
-            return "";
-        }
-
-        @Override
-        public boolean isHavePowerAssign() {
-            return true;
-        }
-
-        @Override
-        public boolean isCanSwitch() {
-            return true;
-        }
-
-        @Override
-        public boolean isRun() {
-            return true;
-        }
-
-        @Override
-        public boolean isShowPower() {
-            return false;
-        }
-
-        @Override
-        public boolean isShowSwitch() {
-            return false;
-        }
-
-        @Override
-        public CharSequence getDevNo() {
-            return "123";
-        }
-
-        @Override
-        public CharSequence getDevName() {
-            return "123";
-        }
-
-        @Override
-        public CharSequence getDevRoom() {
-            return "123";
-        }
-
-        @Override
-        public CharSequence getDevOwner() {
-            return "222";
-        }
-    }
 
     @Override
     public void forbidClick(View v) {
         super.forbidClick(v);
         switch (v.getId()) {
-            case R.id.activity_emanager_to_query:
-                etDevCode.getText();
+            case R.id.activity_my_dev_list_to_query:
+
+                String devCode = etDevCode.getText().toString();
+                refresh(devCode);
+                displayLoadingDialog("查询中");
                 break;
         }
-    }
-
-
-    private void addTestDate(List<EManagerDialog.IEDetails> l) {
-        l.add(new EManagerDialog.IEDetails() {
-            @Override
-            public CharSequence getLabel() {
-                return "";
-            }
-
-            @Override
-            public CharSequence getValue() {
-                return "";
-            }
-
-            @Override
-            public CharSequence getUnit() {
-                return "";
-            }
-        });
-        l.add(new EManagerDialog.IEDetails() {
-            @Override
-            public CharSequence getLabel() {
-                return "";
-            }
-
-            @Override
-            public CharSequence getValue() {
-                return "";
-            }
-
-            @Override
-            public CharSequence getUnit() {
-                return "";
-            }
-        });
-        l.add(new EManagerDialog.IEDetails() {
-            @Override
-            public CharSequence getLabel() {
-                return "";
-            }
-
-            @Override
-            public CharSequence getValue() {
-                return "";
-            }
-
-            @Override
-            public CharSequence getUnit() {
-                return "";
-            }
-        });
-        l.add(new EManagerDialog.IEDetails() {
-            @Override
-            public CharSequence getLabel() {
-                return "";
-            }
-
-            @Override
-            public CharSequence getValue() {
-                return "";
-            }
-
-            @Override
-            public CharSequence getUnit() {
-                return "";
-            }
-        });
     }
 
 

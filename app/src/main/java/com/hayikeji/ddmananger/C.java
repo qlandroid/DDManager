@@ -30,4 +30,5 @@ public class C {
     public static int SCREEN_HEIGHT_3;
 
 
+    public static String DEV_CODE = "devCode";
 }

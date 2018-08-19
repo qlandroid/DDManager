@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.R;
+import com.hayikeji.ddmananger.ui.adapter.bean.IECloseManager;
 
 /**
  * 描述：

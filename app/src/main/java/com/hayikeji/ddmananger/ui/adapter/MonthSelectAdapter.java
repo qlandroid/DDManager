@@ -2,6 +2,7 @@ package com.hayikeji.ddmananger.ui.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.R;
+import com.hayikeji.ddmananger.ui.adapter.bean.IMonth;
 
 /**
  * 描述：

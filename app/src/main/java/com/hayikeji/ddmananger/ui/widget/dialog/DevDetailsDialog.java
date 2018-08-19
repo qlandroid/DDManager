@@ -1,6 +1,7 @@
 package com.hayikeji.ddmananger.ui.widget.dialog;
 
 import android.content.Context;
+import android.content.pm.LabeledIntent;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +11,14 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.bean.DevDetails;
+import com.hayikeji.ddmananger.bean.DeviceBean;
 import com.hayikeji.ddmananger.ui.adapter.QLViewHolder;
+import com.hayikeji.ddmananger.utils.DateUtils;
 import com.hayikeji.ddmananger.utils.div.DividerItemDecoration;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 描述：
@@ -52,8 +58,20 @@ public class DevDetailsDialog {
         sheet.setContentView(inflate);
     }
 
-    public void resetView(DevDetails d) {
+    public void resetView(DeviceBean d) {
+        List<ILabelContent> l = new ArrayList<>();
 
+        l.add(new LabelContent("设备编号", d.getCode()));
+        l.add(new LabelContent("设备名称", d.getNickname()));
+        l.add(new LabelContent("户主", d.getDevOwner().toString()));
+        l.add(new LabelContent("总购电量", d.getBuyElectric() + ""));
+        l.add(new LabelContent("总用电量", d.getElectric() + ""));
+        l.add(new LabelContent("当前状态", "1".equals(d.getDStatus()) ? "在线" : "停电"));
+        l.add(new LabelContent("创建时间", DateUtils.getStringDate4(d.getTime() * 1000)));
+
+
+        devDetailsAdapter.setNewData(l);
+        devDetailsAdapter.notifyDataSetChanged();
     }
 
     public void show() {
@@ -74,6 +92,26 @@ public class DevDetailsDialog {
         protected void convert(QLViewHolder helper, ILabelContent item) {
             helper.setText(R.id.item_t_1, item.getLabel())
                     .setText(R.id.item_t_2, item.getContent());
+        }
+    }
+
+    private static class LabelContent implements ILabelContent {
+        String label;
+        String content;
+
+        public LabelContent(String label, String content) {
+            this.label = label;
+            this.content = content;
+        }
+
+        @Override
+        public CharSequence getLabel() {
+            return label;
+        }
+
+        @Override
+        public CharSequence getContent() {
+            return content;
         }
     }
 }

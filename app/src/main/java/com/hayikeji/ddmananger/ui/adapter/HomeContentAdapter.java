@@ -3,6 +3,12 @@ package com.hayikeji.ddmananger.ui.adapter;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.hayikeji.ddmananger.R;
+import com.hayikeji.ddmananger.bean.WarnBean;
+import com.hayikeji.ddmananger.ui.adapter.bean.HomeTitle;
+import com.hayikeji.ddmananger.ui.adapter.bean.IHomeError;
+import com.hayikeji.ddmananger.ui.fragment.home.WarnMsgFragment;
+
+import java.util.List;
 
 /**
  * 描述：
@@ -22,16 +28,15 @@ public class HomeContentAdapter extends BaseMultiItemQuickAdapter<MultiItemEntit
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
-     *
      */
     public HomeContentAdapter() {
         super(null);
         addItemType(UN_BIND, R.layout.item_un_bind);
-        addItemType(NO_MSG,R.layout.item_no_msg);
-        addItemType(TITLE,R.layout.item_title);
-        addItemType(SMALL,R.layout.item_small);
-        addItemType(STOP,R.layout.item_stop);
-        addItemType(ERROR,R.layout.item_error);
+        addItemType(NO_MSG, R.layout.item_no_msg);
+        addItemType(TITLE, R.layout.item_title);
+        addItemType(SMALL, R.layout.item_small);
+        addItemType(STOP, R.layout.item_stop);
+        addItemType(ERROR, R.layout.item_error);
     }
 
     @Override
@@ -85,7 +90,9 @@ public class HomeContentAdapter extends BaseMultiItemQuickAdapter<MultiItemEntit
      * @param item
      */
     private void convertTitle(QLViewHolder helper, MultiItemEntity item) {
-
+        if (item instanceof HomeTitle) {
+            helper.setText(R.id.item_title_tv, ((HomeTitle) item).getTitle());
+        }
     }
 
     /**
@@ -115,6 +122,11 @@ public class HomeContentAdapter extends BaseMultiItemQuickAdapter<MultiItemEntit
      * @param item
      */
     private void convertError(QLViewHolder helper, MultiItemEntity item) {
-
+        IHomeError error = (IHomeError) item;
+        helper.setText(R.id.item_error_tv_title, error.getTitle())
+                .setText(R.id.item_error_tv_dev_code, error.getDevCode())
+                .setText(R.id.item_error_tv_error_content, error.getErrorContent())
+                .setText(R.id.item_error_tv_date, error.getDate());
     }
+
 }

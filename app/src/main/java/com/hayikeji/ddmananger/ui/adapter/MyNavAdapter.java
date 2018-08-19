@@ -1,8 +1,8 @@
 package com.hayikeji.ddmananger.ui.adapter;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
-import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.hayikeji.ddmananger.R;
+import com.hayikeji.ddmananger.ui.adapter.bean.INav;
 
 import java.util.List;
 

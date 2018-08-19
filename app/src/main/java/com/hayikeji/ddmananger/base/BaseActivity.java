@@ -434,6 +434,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+            case REQUEST_CODE_DECODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    return;
+                }
+                String resultContent = CaptureActivity.getResultContent(data);
+                onResultCord(resultContent);
+                break;
             case REQUEST_IMAGE:
                 if (resultCode != Activity.RESULT_OK) {
                     return;
@@ -456,6 +463,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                 super.onActivityResult(requestCode, resultCode, data);
                 break;
         }
+    }
+
+    public void onResultCord(String resultContent) {
     }
 
 

@@ -1,4 +1,4 @@
-package com.hayikeji.ddmananger.ui.fragment;
+package com.hayikeji.ddmananger.ui.fragment.home;
 
 import android.os.Bundle;
 import android.ql.bindview.BindView;
@@ -14,13 +14,18 @@ import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseFragment;
 import com.hayikeji.ddmananger.base.BindLayout;
 import com.hayikeji.ddmananger.ui.IGrid;
+import com.hayikeji.ddmananger.ui.activity.AppVersionActivity;
 import com.hayikeji.ddmananger.ui.activity.EManagerActivity;
+import com.hayikeji.ddmananger.ui.activity.EUseRecordActivity;
+import com.hayikeji.ddmananger.ui.activity.LoginActivity;
 import com.hayikeji.ddmananger.ui.activity.MyDevListActivity;
 import com.hayikeji.ddmananger.ui.activity.PayEActivity;
 import com.hayikeji.ddmananger.ui.activity.PayVipActivity;
+import com.hayikeji.ddmananger.ui.activity.bind.BindDevActivity;
 import com.hayikeji.ddmananger.ui.adapter.GridAdapter;
-import com.hayikeji.ddmananger.ui.adapter.INav;
+import com.hayikeji.ddmananger.ui.adapter.bean.INav;
 import com.hayikeji.ddmananger.ui.adapter.MyNavAdapter;
+import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,9 +98,17 @@ public class MyFragment extends BaseFragment {
                 IGrid o = (IGrid) adapter.getData().get(position);
                 switch (o.getTag()) {
                     case NAV_MENU_MY_DEV:
+                        if (!UserDevPreferences.isHasDev(getContext())) {
+                            displayMessageDialog("请先绑定设备");
+                            return;
+                        }
                         startActivity(MyDevListActivity.class);
                         break;
                     case NAV_MENU_CONTROL_DEV:
+                        if (!UserDevPreferences.isHasDev(getContext())) {
+                            displayMessageDialog("请先绑定设备");
+                            return;
+                        }
                         startActivity(EManagerActivity.class);
                         break;
                     case NAV_MENU_USER_DETAILS:
@@ -108,6 +121,8 @@ public class MyFragment extends BaseFragment {
     @Override
     protected void initWidget(View view) {
         super.initWidget(view);
+
+        tvLogout.setOnClickListener(this);
         rvBottomNav.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public boolean canScrollVertically() {
@@ -126,6 +141,18 @@ public class MyFragment extends BaseFragment {
         rvGridNav.setAdapter(gridNavAdapter);
     }
 
+    @Override
+    public void widgetClick(View v) {
+        super.widgetClick(v);
+        switch (v.getId()) {
+
+            case R.id.frag_my_tv_logout:
+                startActivity(LoginActivity.class);
+                getActivity().finish();
+                break;
+        }
+    }
+
     private void initBottomNavData() {
         List<INav> list = new ArrayList<>();
         list.add(new BottomNavBean("成为VIP", R.drawable.ic_vip, NAV_MENU_VIP, MyNavAdapter.SINGLE));
@@ -138,7 +165,7 @@ public class MyFragment extends BaseFragment {
         list.add(new BottomNavBean("招商加盟", R.drawable.ic_vip, NAV_MENU_E_RECORD, MyNavAdapter.S_DIV));
         list.add(new BottomNavBean("客户热线", R.drawable.ic_vip, NAV_MENU_E_RECORD, MyNavAdapter.SINGLE));
         list.add(new BottomNavBean());
-        list.add(new BottomNavBean("版本号", R.drawable.ic_vip, NAV_MENU_E_RECORD, MyNavAdapter.SINGLE));
+        list.add(new BottomNavBean("版本号", R.drawable.ic_vip, NAV_MENU_APP_VERSION, MyNavAdapter.SINGLE));
 
         myNavAdapter = new MyNavAdapter(list);
         myNavAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -150,15 +177,30 @@ public class MyFragment extends BaseFragment {
                 }
                 switch (o.getMenuType()) {
                     case NAV_MENU_APP_VERSION:
+                        startActivity(AppVersionActivity.class);
                         break;
                     case NAV_MENU_E_ADD:
+                        startActivity(BindDevActivity.class);
                         break;
                     case NAV_MENU_E_PAY:
+                        if (!UserDevPreferences.isHasDev(getContext())) {
+                            displayMessageDialog("请先绑定设备");
+                            return;
+                        }
                         startActivity(PayEActivity.class);
                         break;
                     case NAV_MENU_E_RECORD:
+                        if (!UserDevPreferences.isHasDev(getContext())) {
+                            displayMessageDialog("请先绑定设备");
+                            return;
+                        }
+                        startActivity(EUseRecordActivity.class);
                         break;
                     case NAV_MENU_VIP:
+                        if (!UserDevPreferences.isHasDev(getContext())) {
+                            displayMessageDialog("请先绑定设备");
+                            return;
+                        }
                         startActivity(PayVipActivity.class);
                         break;
                 }

@@ -8,7 +8,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.ui.adapter.DevSelectAdapter;
-import com.hayikeji.ddmananger.ui.adapter.IDevDetails;
+import com.hayikeji.ddmananger.ui.adapter.bean.IDevDetails;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 
 import java.util.List;

@@ -12,8 +12,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.R;
-import com.hayikeji.ddmananger.ui.activity.EManagerActivity;
-import com.hayikeji.ddmananger.ui.adapter.IECloseManager;
+import com.hayikeji.ddmananger.ui.adapter.bean.IECloseManager;
 import com.hayikeji.ddmananger.ui.adapter.QLViewHolder;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 

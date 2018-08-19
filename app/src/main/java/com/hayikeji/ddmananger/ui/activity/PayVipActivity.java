@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseActivity;
 import com.hayikeji.ddmananger.base.BindLayout;
-import com.hayikeji.ddmananger.ui.adapter.IMonth;
+import com.hayikeji.ddmananger.ui.adapter.bean.IMonth;
 import com.hayikeji.ddmananger.ui.adapter.MonthSelectAdapter;
 
 import java.util.ArrayList;

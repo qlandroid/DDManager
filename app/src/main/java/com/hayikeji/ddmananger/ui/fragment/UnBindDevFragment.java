@@ -1,12 +1,17 @@
 package com.hayikeji.ddmananger.ui.fragment;
 
+import android.graphics.Color;
 import android.ql.bindview.BindView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseFragment;
 import com.hayikeji.ddmananger.base.BindLayout;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 /**
  * 描述：
@@ -25,7 +30,20 @@ public class UnBindDevFragment extends BaseFragment {
     protected void initWidget(View view) {
         super.initWidget(view);
         tvToBind.setOnClickListener(this);
+        initTopbar();
     }
+
+    private void initTopbar() {
+        ViewParent parent = mTopbar.getParent();
+        ViewGroup parentView = (ViewGroup) parent;
+        View v = new View(getContext());
+        LinearLayout.LayoutParams l = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, QMUIStatusBarHelper.getStatusbarHeight(getContext()));
+
+        v.setLayoutParams(l);
+        v.setBackgroundColor(Color.WHITE);
+        parentView.addView(v, 0);
+    }
+
 
     @Override
     public void widgetClick(View v) {

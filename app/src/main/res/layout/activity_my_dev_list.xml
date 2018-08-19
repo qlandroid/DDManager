@@ -67,6 +67,7 @@
         </LinearLayout>
 
         <TextView
+            android:clickable="true"
             android:id="@+id/activity_my_dev_list_to_query"
             style="@style/btnNormalRadius"
             android:layout_width="match_parent"

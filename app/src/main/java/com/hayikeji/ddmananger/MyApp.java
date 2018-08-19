@@ -24,7 +24,7 @@ public class MyApp extends MultiDexApplication {
         super.onCreate();
         instance = this;
 
-        OkHttpInfo.initOkHttpCard(this);
+        //OkHttpInfo.initOkHttpCard(this);
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         C.SCREEN_WIDTH= displayMetrics.widthPixels;
         C.SCREEN_HEIGHT= displayMetrics.heightPixels;
