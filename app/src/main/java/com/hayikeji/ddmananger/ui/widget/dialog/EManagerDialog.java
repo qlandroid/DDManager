@@ -1,6 +1,8 @@
 package com.hayikeji.ddmananger.ui.widget.dialog;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -29,9 +31,11 @@ public class EManagerDialog implements CompoundButton.OnCheckedChangeListener {
 
     private QMUIBottomSheet sheet;
     private ItemDetailsAdapter adapter;
-    private TextView tvCode, tvName, tvStatus;
+    private TextView tvCode, tvName, tvStatus, tvDate;
     private Switch aSwitch;
     private OnSwitchStatusListener onSwitchStatusListener;
+
+    private boolean isFirst;
 
     public EManagerDialog(Context context) {
         init(context);
@@ -45,7 +49,7 @@ public class EManagerDialog implements CompoundButton.OnCheckedChangeListener {
         tvName = (TextView) viewGroup.findViewById(R.id.dialog_e_manager_tv_name);
         tvStatus = (TextView) viewGroup.findViewById(R.id.dialog_e_manager_tv_status);
         aSwitch = (Switch) viewGroup.findViewById(R.id.dialog_e_manager_switch);
-
+        tvDate = (TextView) viewGroup.findViewById(R.id.dialog_e_manager_tv_date);
         viewGroup.findViewById(R.id.dialog_e_manager_close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,21 +62,26 @@ public class EManagerDialog implements CompoundButton.OnCheckedChangeListener {
         sheet = new QMUIBottomSheet(context);
         sheet.setContentView(viewGroup);
         sheet.setCancelable(true);
-
         aSwitch.setOnCheckedChangeListener(this);
+
     }
 
 
-    public void resetContent(IECloseManager ieCloseManager, List<IEDetails> list) {
-        tvCode.setText(ieCloseManager.getDevName());
+    public void resetContent(String date, IECloseManager ieCloseManager, List<IEDetails> list) {
+        tvCode.setText(ieCloseManager.getDevNo());
         tvName.setText(ieCloseManager.getDevName());
+        int i = ieCloseManager.isRun() ? ContextCompat.getColor(tvName.getContext(), R.color.text_green_color) : Color.RED;
+        tvStatus.setTextColor(i);
         String s = ieCloseManager.isRun() ? "运行中" : "关闭中";
         tvStatus.setText(s);
         aSwitch.setChecked(ieCloseManager.isRun());
-
+        tvDate.setText(date);
         adapter.setNewData(list);
         adapter.notifyDataSetChanged();
+        isFirst = false;
+
     }
+
 
     public void show() {
         sheet.show();
@@ -90,6 +99,9 @@ public class EManagerDialog implements CompoundButton.OnCheckedChangeListener {
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (onSwitchStatusListener == null) {
             return;
+        }
+        if (!isFirst) {
+            isFirst = true;
         }
         onSwitchStatusListener.onSwitchStatus(isChecked);
     }

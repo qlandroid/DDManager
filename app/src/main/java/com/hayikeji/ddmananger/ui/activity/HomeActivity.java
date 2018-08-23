@@ -53,7 +53,6 @@ public class HomeActivity extends BaseActivity implements IUnBindDev {
         super.initData();
         fragments.add(HomeFragment.newInstance());
         fragments.add(EDetailsFragment.newInstance(this));
-        fragments.add(EDetailsFragment.newInstance(this));
         fragments.add(EMsgFragment.newInstance());
         fragments.add(MyFragment.newInstance());
     }
@@ -73,11 +72,11 @@ public class HomeActivity extends BaseActivity implements IUnBindDev {
         navIndex.setOnClickListener(this);
         navEDetails.setTag(1);
         navEDetails.setOnClickListener(this);
-        navEuse.setTag(2);
-        navEuse.setOnClickListener(this);
-        navInform.setTag(3);
+     /*   navEuse.setTag(2);
+        navEuse.setOnClickListener(this);*/
+        navInform.setTag(2);
         navInform.setOnClickListener(this);
-        navMy.setTag(4);
+        navMy.setTag(3);
         navMy.setOnClickListener(this);
 
         myChangeFragment(R.id.activity_home_fl_content, fragments.get(0));

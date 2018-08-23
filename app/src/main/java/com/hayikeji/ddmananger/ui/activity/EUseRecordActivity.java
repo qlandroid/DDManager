@@ -1,12 +1,13 @@
 package com.hayikeji.ddmananger.ui.activity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.ql.bindview.BindView;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.hayikeji.ddmananger.R;
@@ -19,20 +20,20 @@ import com.hayikeji.ddmananger.http.OkHttpHeader;
 import com.hayikeji.ddmananger.http.ResultCallback2;
 import com.hayikeji.ddmananger.info.UrlApi;
 import com.hayikeji.ddmananger.ui.fragment.EUseRecordMonthFragment;
+import com.hayikeji.ddmananger.ui.fragment.EUseRecordYearFragment;
 import com.hayikeji.ddmananger.utils.DataUtils;
-import com.hayikeji.ddmananger.utils.PreferencesUtils;
 import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
-import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogMenuItemView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@BindLayout(layoutRes = R.layout.activity_euse_record,title = "电量统计")
+@BindLayout(layoutRes = R.layout.activity_euse_record, title = "电量统计")
 public class EUseRecordActivity extends BaseActivity {
+    private static final int REQUEST_SELECT_DEV = 123;
+
     private final String P_MONTH = "模式:月";
     private final String P_YEAR = "模式:年";
 
@@ -50,13 +51,15 @@ public class EUseRecordActivity extends BaseActivity {
     private Button topbarRightTextBtn;
     private int userId;
     private List<BaseFragment> list = new ArrayList<>();
+    private int pageIndex;
 
     @Override
     public void initData() {
         super.initData();
         userId = UserDevPreferences.getUserId(this);
-
+        pageIndex = 0;
         list.add(EUseRecordMonthFragment.newInstance());
+        list.add(EUseRecordYearFragment.newInstance());
     }
 
     @Override
@@ -114,7 +117,7 @@ public class EUseRecordActivity extends BaseActivity {
         super.forbidClick(v);
         switch (v.getId()) {
             case R.id.activity_euse_record_tv_select_dev:
-                startActivity(DevListSelectActivity.class);
+                startActivity(DevListSelectActivity.class, REQUEST_SELECT_DEV);
                 break;
             case R.id.top_bar_right_btn:
                 QMUIDialog d = new QMUIDialog.CheckableDialogBuilder(this)
@@ -123,10 +126,12 @@ public class EUseRecordActivity extends BaseActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (which) {
                                     case 0:
+                                        pageIndex = 0;
                                         topbarRightTextBtn.setText(P_MONTH);
                                         myChangeFragment(R.id.activity_e_User_record_fl_content, list.get(0));
                                         break;
                                     case 1:
+                                        pageIndex = 1;
                                         topbarRightTextBtn.setText(P_YEAR);
                                         myChangeFragment(R.id.activity_e_User_record_fl_content, list.get(1));
                                         break;
@@ -137,5 +142,30 @@ public class EUseRecordActivity extends BaseActivity {
                 d.setCancelable(true);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_SELECT_DEV:
+                if (resultCode != Activity.RESULT_OK) {
+                    return;
+                }
+                int devId = DevListSelectActivity.getDevId(data);
+                UserDevPreferences.saveSelectDev(this,devId);
+                BaseFragment baseFragment = list.get(pageIndex);
+                loadDev(devId);
+                if (baseFragment instanceof IRefresh) {
+                    ((IRefresh) baseFragment).refresh();
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
+
+    }
+
+    public interface IRefresh {
+        void refresh();
     }
 }

@@ -22,6 +22,7 @@ import com.hayikeji.ddmananger.ui.adapter.DevSelectAdapter;
 import com.hayikeji.ddmananger.ui.adapter.bean.IDevDetails;
 import com.hayikeji.ddmananger.utils.DataUtils;
 import com.hayikeji.ddmananger.utils.div.DividerItemDecoration;
+import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +58,7 @@ public class DevListSelectActivity extends BaseActivity implements BaseQuickAdap
     private void refresh() {
         displayLoadingDialog("加载数据中");
         Map<String, Object> map = new HashMap<>();
-        map.put("userId", 17);
+        map.put("userId", UserDevPreferences.getUserId(this));
         OkHttpHelper.post(UrlApi.dev_list, map, new ResultCallback2() {
             @Override
             protected void onFailed(String error, int code) {

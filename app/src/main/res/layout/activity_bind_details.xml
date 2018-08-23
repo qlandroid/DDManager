@@ -29,35 +29,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:layout_width="match_parent"
                 android:id="@+id/activity_bind_details_tv_dev_code"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:paddingBottom="@dimen/margin_normal"
-                android:paddingTop="@dimen/margin_normal"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/div_color" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="60sp"
-                android:layout_height="wrap_content"
-                android:text="详细地址"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/activity_bind_details_tv_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
@@ -71,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/div_color" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -143,10 +116,10 @@
 
         <TextView
             android:id="@+id/activity_bind_details_tv_to_pay"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
             style="@style/btnNormalRadius"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:layout_weight="1"
             android:gravity="center"
             android:text="绑定设备" />

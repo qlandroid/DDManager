@@ -5,6 +5,7 @@ import android.ql.bindview.BindView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,11 +22,17 @@ import com.hayikeji.ddmananger.ui.activity.LoginActivity;
 import com.hayikeji.ddmananger.ui.activity.MyDevListActivity;
 import com.hayikeji.ddmananger.ui.activity.PayEActivity;
 import com.hayikeji.ddmananger.ui.activity.PayVipActivity;
+import com.hayikeji.ddmananger.ui.activity.UserDetailsActivity;
 import com.hayikeji.ddmananger.ui.activity.bind.BindDevActivity;
 import com.hayikeji.ddmananger.ui.adapter.GridAdapter;
 import com.hayikeji.ddmananger.ui.adapter.bean.INav;
 import com.hayikeji.ddmananger.ui.adapter.MyNavAdapter;
+import com.hayikeji.ddmananger.utils.eventbus.ChangeDetailsEventBus;
 import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,16 +88,34 @@ public class MyFragment extends BaseFragment {
     @Override
     protected void initData() {
         super.initData();
+        ChangeDetailsEventBus.getInstance().register(this);
         initBottomNavData();
         initGridNavDate();
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void regEventBus(Integer i) {
+        tvDevCount.setText(UserDevPreferences.getDevCount(getContext()));
+        tvInDate.setText(UserDevPreferences.getInDate(getContext()));
+        String userNickName = UserDevPreferences.getUserNickName(getContext());
+        if (TextUtils.isEmpty(userNickName)) {
+            userNickName = "昵称";
+        }
+        tvName.setText(userNickName);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ChangeDetailsEventBus.getInstance().unregister(this);
+    }
+
     private void initGridNavDate() {
         List<IGrid> l = new ArrayList<>();
-        l.add(new GridNavBean(NAV_MENU_MY_DEV, "我的设备", R.drawable.icon_home_order_48));
-        l.add(new GridNavBean(NAV_MENU_CONTROL_DEV, "远程断电", R.drawable.icon_home_order_48));
-        l.add(new GridNavBean(NAV_MENU_USER_DETAILS, "个人信息", R.drawable.icon_home_order_48));
+        l.add(new GridNavBean(NAV_MENU_MY_DEV, "我的设备", R.drawable.personal_dev));
+        l.add(new GridNavBean(NAV_MENU_CONTROL_DEV, "远程断电", R.drawable.personal_power_cut));
+        l.add(new GridNavBean(NAV_MENU_USER_DETAILS, "个人信息", R.drawable.personal_infor));
         gridNavAdapter.setNewData(l);
         gridNavAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -112,6 +137,7 @@ public class MyFragment extends BaseFragment {
                         startActivity(EManagerActivity.class);
                         break;
                     case NAV_MENU_USER_DETAILS:
+                        startActivity(UserDetailsActivity.class);
                         break;
                 }
             }
@@ -141,12 +167,14 @@ public class MyFragment extends BaseFragment {
         rvGridNav.setAdapter(gridNavAdapter);
     }
 
+
     @Override
     public void widgetClick(View v) {
         super.widgetClick(v);
         switch (v.getId()) {
 
             case R.id.frag_my_tv_logout:
+                UserDevPreferences.clear(getContext());
                 startActivity(LoginActivity.class);
                 getActivity().finish();
                 break;
@@ -155,17 +183,17 @@ public class MyFragment extends BaseFragment {
 
     private void initBottomNavData() {
         List<INav> list = new ArrayList<>();
-        list.add(new BottomNavBean("成为VIP", R.drawable.ic_vip, NAV_MENU_VIP, MyNavAdapter.SINGLE));
+        list.add(new BottomNavBean("成为VIP", R.drawable.hp_icon_vip, NAV_MENU_VIP, MyNavAdapter.SINGLE));
         list.add(new BottomNavBean());
-        list.add(new BottomNavBean("新增电表", R.drawable.ic_vip, NAV_MENU_E_ADD, MyNavAdapter.S_DIV));
-        list.add(new BottomNavBean("电力缴费", R.drawable.ic_vip, NAV_MENU_E_PAY, MyNavAdapter.S_DIV));
-        list.add(new BottomNavBean("历史电量", R.drawable.ic_vip, NAV_MENU_E_RECORD, MyNavAdapter.SINGLE));
+        list.add(new BottomNavBean("新增电表", R.drawable.hp_icon_vip, NAV_MENU_E_ADD, MyNavAdapter.S_DIV));
+        list.add(new BottomNavBean("电力缴费", R.drawable.hp_icon_vip, NAV_MENU_E_PAY, MyNavAdapter.S_DIV));
+        list.add(new BottomNavBean("历史电量", R.drawable.hp_icon_vip, NAV_MENU_E_RECORD, MyNavAdapter.SINGLE));
         list.add(new BottomNavBean());
-        list.add(new BottomNavBean("合作伙伴", R.drawable.ic_vip, NAV_MENU_E_RECORD, MyNavAdapter.S_DIV));
-        list.add(new BottomNavBean("招商加盟", R.drawable.ic_vip, NAV_MENU_E_RECORD, MyNavAdapter.S_DIV));
-        list.add(new BottomNavBean("客户热线", R.drawable.ic_vip, NAV_MENU_E_RECORD, MyNavAdapter.SINGLE));
+        list.add(new BottomNavBean("合作伙伴", R.drawable.hp_icon_cooperation, NAV_MENU_E_RECORD, MyNavAdapter.S_DIV));
+        list.add(new BottomNavBean("招商加盟", R.drawable.hp_icon_join, NAV_MENU_E_RECORD, MyNavAdapter.S_DIV));
+        list.add(new BottomNavBean("客户热线", R.drawable.hp_icon_vip, NAV_MENU_E_RECORD, MyNavAdapter.SINGLE));
         list.add(new BottomNavBean());
-        list.add(new BottomNavBean("版本号", R.drawable.ic_vip, NAV_MENU_APP_VERSION, MyNavAdapter.SINGLE));
+        list.add(new BottomNavBean("版本号", R.drawable.hp_icon_vip, NAV_MENU_APP_VERSION, MyNavAdapter.SINGLE));
 
         myNavAdapter = new MyNavAdapter(list);
         myNavAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

@@ -10,9 +10,16 @@ import com.google.zxing.common.StringUtils;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseActivity;
 import com.hayikeji.ddmananger.base.BindLayout;
+import com.hayikeji.ddmananger.bean.BaseResult;
+import com.hayikeji.ddmananger.http.OkHttpHeader;
+import com.hayikeji.ddmananger.http.ResultCallback2;
+import com.hayikeji.ddmananger.info.UrlApi;
 import com.hayikeji.ddmananger.utils.CheckUtils;
 
-@BindLayout(layoutRes = R.layout.activity_forget,title = "忘记密码")
+import java.util.HashMap;
+import java.util.Map;
+
+@BindLayout(layoutRes = R.layout.activity_forget, title = "忘记密码")
 public class ForgetActivity extends BaseActivity {
 
     @BindView(R.id.activity_forget_et_phone)
@@ -68,11 +75,30 @@ public class ForgetActivity extends BaseActivity {
                     toFocusable(etPw2);
                     return;
                 }
-                String code = etCode.getText().toString();
-                if (!CheckUtils.isMsgCode(code)) {
-                    return;
-                }
-                finish();
+                Map<String, String> map = new HashMap<>();
+                map.put("vPhone", rp);
+                map.put("vPassword", pw1);
+
+                displayLoadingDialog("提交中");
+                OkHttpHeader.post(UrlApi.user_forget_password, map, new ResultCallback2() {
+                    @Override
+                    protected void onFailed(String error, int code) {
+                        cancelLoadingDialog();
+                        displayMessageDialog(error);
+                    }
+
+                    @Override
+                    protected void onSuccess(BaseResult response, int id) {
+                        cancelLoadingDialog();
+                        if (!response.isSuccess()) {
+                            displayMessageDialog(response.getMessage());
+                            return;
+                        }
+                        displayTipDialogSuccess("修改成功");
+                        finish();
+                    }
+                });
+
                 break;
         }
     }

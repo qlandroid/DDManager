@@ -183,8 +183,6 @@ public class EMsgFragment extends BaseFragment {
         }
     }
 
-    ;
-
     @Override
     protected void initWidget(View view) {
         super.initWidget(view);
@@ -207,6 +205,7 @@ public class EMsgFragment extends BaseFragment {
     }
 
     private void initTabAndPager() {
+        vp.setOffscreenPageLimit(4);
         vp.setAdapter(tabMenuAdapter);
 //        QMUIDrawableHelper
         Drawable drawable = getContext().getResources().getDrawable(R.drawable.shape_blue_line);

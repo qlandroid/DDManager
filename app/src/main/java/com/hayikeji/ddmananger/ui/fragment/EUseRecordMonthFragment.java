@@ -20,6 +20,7 @@ import com.hayikeji.ddmananger.bean.EUseBean;
 import com.hayikeji.ddmananger.http.OkHttpHeader;
 import com.hayikeji.ddmananger.http.ResultCallback2;
 import com.hayikeji.ddmananger.info.UrlApi;
+import com.hayikeji.ddmananger.ui.activity.EUseRecordActivity;
 import com.hayikeji.ddmananger.ui.adapter.EUseMonthAdapter;
 import com.hayikeji.ddmananger.utils.DataUtils;
 import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
@@ -38,7 +39,7 @@ import java.util.Map;
  * @author ql
  */
 @BindLayout(layoutRes = R.layout.frag_e_use_record_month, bindTopBar = false)
-public class EUseRecordMonthFragment extends BaseFragment {
+public class EUseRecordMonthFragment extends BaseFragment implements EUseRecordActivity.IRefresh {
 
     @BindView(R.id.frag_e_use_record_month_tv)
     View vSelectDate;
@@ -48,6 +49,8 @@ public class EUseRecordMonthFragment extends BaseFragment {
     TextView tvSelectDate;
 
     TimePickerView pvTime;
+
+    private int year, month;
 
     EUseMonthAdapter eUseMonthAdapter;
 
@@ -70,8 +73,8 @@ public class EUseRecordMonthFragment extends BaseFragment {
             public void onTimeSelect(Date date, View v) {
                 Calendar c = Calendar.getInstance();
                 c.setTime(date);
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH) + 1;
+                year = c.get(Calendar.YEAR);
+                month = c.get(Calendar.MONTH) + 1;
                 loadMonth(UserDevPreferences.getSelectDev(getContext()), year, month);
                 tvSelectDate.setText(year + "年" + month + "月");
             }
@@ -81,8 +84,8 @@ public class EUseRecordMonthFragment extends BaseFragment {
         rv.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
         rv.setAdapter(eUseMonthAdapter);
         Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH) + 1;
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH) + 1;
         tvSelectDate.setText(year + "年" + month + "月");
         loadMonth(UserDevPreferences.getSelectDev(getContext()), year, month);
     }
@@ -123,5 +126,10 @@ public class EUseRecordMonthFragment extends BaseFragment {
                 pvTime.show();
                 break;
         }
+    }
+
+    @Override
+    public void refresh() {
+        loadMonth(UserDevPreferences.getSelectDev(getContext()), year, month);
     }
 }

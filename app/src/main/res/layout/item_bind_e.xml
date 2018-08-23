@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/un_binding_icon" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@drawable/s_bg_div"
+        android:textColor="@color/s_btn_blue_text"
+        android:background="@drawable/s_bg_div_blue"
         android:clickable="true"
         android:paddingBottom="@dimen/margin_top_normal"
         android:paddingLeft="@dimen/activity_horizontal_margin"

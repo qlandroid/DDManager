@@ -22,10 +22,12 @@ import com.hayikeji.ddmananger.base.BindLayout;
 import com.hayikeji.ddmananger.bean.BaseResult;
 import com.hayikeji.ddmananger.bean.DeviceBean;
 import com.hayikeji.ddmananger.bean.EDetails;
+import com.hayikeji.ddmananger.http.OkHttpHeader;
 import com.hayikeji.ddmananger.http.OkHttpHelper;
 import com.hayikeji.ddmananger.http.ResultCallback2;
 import com.hayikeji.ddmananger.info.UrlApi;
 import com.hayikeji.ddmananger.ui.activity.DevListSelectActivity;
+import com.hayikeji.ddmananger.ui.activity.EUseRecordActivity;
 import com.hayikeji.ddmananger.ui.activity.HomeActivity;
 import com.hayikeji.ddmananger.ui.activity.PowerManagerActivity;
 import com.hayikeji.ddmananger.ui.adapter.bean.IDevDetails;
@@ -40,6 +42,7 @@ import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,13 +134,66 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
         /*LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mTopbar.getLayoutParams();
         layoutParams.topMargin = QMUIStatusBarHelper.getStatusbarHeight(getContext());
         mTopbar.setLayoutParams(layoutParams);*/
-        refresh();
+
         displayLoadingDialog("加载数据中");
+
+        int selectDev = UserDevPreferences.getSelectDev(getContext());
+        if (selectDev == -1) {
+            checkHasDev();
+        } else {
+            refresh();
+        }
+    }
+
+    private void checkHasDev() {
+        //加载设备
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", UserDevPreferences.getUserId(getContext()));
+        OkHttpHelper.post(UrlApi.dev_list, map, new ResultCallback2() {
+            @Override
+            protected void onFailed(String error, int code) {
+                cancelLoadingDialog();
+                displayMessageDialog(error);
+            }
+
+            @Override
+            protected void onSuccess(BaseResult response, int id) {
+                cancelLoadingDialog();
+                if (!response.isSuccess()) {
+                    displayMessageDialog(response.getCode() + response.getMessage());
+                    return;
+                }
+                ArrayList<DeviceBean> arrayResult = DataUtils.getArrayResult(response.getList(), DeviceBean.class);
+                if (arrayResult == null || arrayResult.size() == 0) {
+                    UserDevPreferences.saveIsHasDev(getContext(), false);
+                    iUnBindDev.changeUnbindFragment();
+                } else {
+                    UserDevPreferences.saveIsHasDev(getContext(), true);
+                    UserDevPreferences.saveSelectDev(getContext(), arrayResult.get(0).getId());
+                    refresh();
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            displayLoadingDialog("加载数据中");
+            int selectDev = UserDevPreferences.getSelectDev(getContext());
+            if (selectDev == -1) {
+                checkHasDev();
+            } else {
+                refresh();
+            }
+        }
     }
 
     private void refresh() {
         if (!UserDevPreferences.isHasDev(getContext())) {
-            iUnBindDev.changeUnbindFragment();
+            checkHasDev();
             return;
         }
         Map<String, Object> map = new HashMap<>();
@@ -177,7 +233,7 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
                         .setTextView(monthE.getTotalE() + "", tvMonthENum)
                         .setTextView(monthE.getMonth() + "  月", tvMonth);
 
-                String stringDate4 = DateUtils.getStringDate4(resultObj.getBindDate()*1000);
+                String stringDate4 = DateUtils.getStringDate4(resultObj.getBindDate() * 1000);
                 setTextView(resultObj.getUnit() + "", tvUnit)
                         .setTextView(stringDate4, tvBindDate)
                         .setTextView(String.format("%.2f", resultObj.getBuyElectric()), tvPrice);
@@ -235,6 +291,7 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
                 startActivity(PowerManagerActivity.class);
                 break;
             case R.id.e_details_tv_summary://查看历史统计
+                startActivity(EUseRecordActivity.class);
                 break;
             case R.id.e_details_tv_setting_name://设置别名
                 displaySettingNameDialog();
@@ -257,12 +314,12 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
                     @Override
                     public void onClick(QMUIDialog dialog, int index) {
                         Editable text = editText.getText();
-                        tvName.setText(text);
-
                         if (QMUIKeyboardHelper.isKeyboardVisible(getActivity())) {
                             QMUIKeyboardHelper.hideKeyboard(editText);
                         }
                         dialog.cancel();
+                        displayLoadingDialog("提交中");
+                        httpSetDevNickName(text.toString());
                     }
                 }).addAction("取消", new QMUIDialogAction.ActionListener() {
             @Override
@@ -278,6 +335,32 @@ public class EDetailsFragment extends BaseFragment implements SwipeRefreshLayout
             }
         });
         editTextDialogBuilder.show();
+    }
+
+    private void httpSetDevNickName(String nickName) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", UserDevPreferences.getUserId(getContext()));
+        map.put("devId", UserDevPreferences.getSelectDev(getContext()));
+        map.put("nickName", nickName);
+
+        OkHttpHeader.post(UrlApi.setting_nice_name, map, new ResultCallback2() {
+            @Override
+            protected void onFailed(String error, int code) {
+                cancelLoadingDialog();
+                displayMessageDialog(error);
+            }
+
+            @Override
+            protected void onSuccess(BaseResult response, int id) {
+                cancelLoadingDialog();
+                if (response.isSuccess()) {
+                    displayTipDialogSuccess("修改成功");
+                } else {
+                    displayMessageDialog(response.getMessage());
+                }
+                refresh();
+            }
+        });
     }
 
     @Override

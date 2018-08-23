@@ -76,7 +76,8 @@
         <activity android:name=".ui.activity.PayRecordActivity" />
         <activity android:name=".ui.activity.PayVipActivity" />
         <activity android:name=".ui.activity.AppVersionActivity" />
-        <activity android:name=".ui.activity.EUseRecordActivity"></activity>
+        <activity android:name=".ui.activity.EUseRecordActivity" />
+        <activity android:name=".ui.activity.UserDetailsActivity"></activity>
     </application>
 
 </manifest>

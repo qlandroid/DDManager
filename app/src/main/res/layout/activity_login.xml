@@ -28,7 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="请输入手机号"
+            android:hint="请输入账号/手机号"
+            android:maxLength="20"
             android:paddingBottom="@dimen/margin_normal"
             android:paddingTop="@dimen/margin_normal"
             android:textSize="14sp" />
@@ -43,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLength="20"
             android:hint="请输入密码"
             android:inputType="textPassword"
             android:paddingTop="@dimen/margin_normal"

@@ -16,119 +16,141 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <FrameLayout
                 android:layout_marginTop="@dimen/margin_normal"
-                android:background="@color/colorWhite"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/margin_normal"
-                    android:paddingTop="@dimen/margin_normal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="设备号码:" />
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
 
-                    <TextView
-                        android:id="@+id/activity_pay_e_tv_dev_code"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/margin_normal"
+                        android:paddingTop="@dimen/margin_normal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="设备号码:" />
+
+                        <TextView
+                            android:id="@+id/activity_pay_e_tv_dev_code"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/div_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/margin_normal"
+                        android:paddingTop="@dimen/margin_normal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="设备名称:" />
+
+                        <TextView
+                            android:id="@+id/activity_pay_e_tv_dev_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/div_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/margin_normal"
+                        android:paddingTop="@dimen/margin_normal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="户主名称:" />
+
+                        <TextView
+                            android:id="@+id/activity_pay_e_tv_owner_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/div_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/margin_normal"
+                        android:paddingTop="@dimen/margin_normal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="门牌号:" />
+
+                        <TextView
+                            android:id="@+id/activity_pay_e_tv_room"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right" />
+
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/div_color" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/margin_normal"
-                    android:paddingTop="@dimen/margin_normal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="设备名称:" />
-
-                    <TextView
-                        android:id="@+id/activity_pay_e_tv_dev_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right" />
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/div_color" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/margin_normal"
-                    android:paddingTop="@dimen/margin_normal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="户主名称:" />
-
-                    <TextView
-                        android:id="@+id/activity_pay_e_tv_owner_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right" />
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/div_color" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/margin_normal"
-                    android:paddingTop="@dimen/margin_normal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="门牌号:" />
-
-                    <TextView
-                        android:id="@+id/activity_pay_e_tv_room"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right" />
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/activity_pay_vip_tv_dev_select"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:clickable="true"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_gravity="right"
+                    android:text="设备选择"
+                    android:background="@drawable/s_bg_div_blue"
+                    android:textColor="@color/s_btn_blue_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/activity_pay_vip_rv_month_select"

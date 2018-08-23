@@ -26,6 +26,7 @@ import com.hayikeji.ddmananger.http.ResultCallback;
 import com.hayikeji.ddmananger.info.UrlApi;
 import com.hayikeji.ddmananger.ui.HomeNav;
 import com.hayikeji.ddmananger.ui.IGrid;
+import com.hayikeji.ddmananger.ui.activity.DevListSelectActivity;
 import com.hayikeji.ddmananger.ui.adapter.GridAdapter;
 import com.hayikeji.ddmananger.ui.adapter.HomeContentAdapter;
 import com.hayikeji.ddmananger.utils.DataUtils;
@@ -108,8 +109,10 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         rvContent.setAdapter(homeContentAdapter);
 
         displayLoadingDialog("加载数据中");
+
         refresh();
     }
+
 
     private void refresh() {
 
@@ -135,6 +138,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     data.clear();
                 }
                 if (!resultObj.getIsHasDev()) {
+                    UserDevPreferences.saveIsHasDev(getContext(), false);
                     //没有设备
                     homeContentAdapter.addData(new MultiItemEntity() {
                         @Override
@@ -162,10 +166,10 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     private void initNav() {
         List<IGrid> navs = new ArrayList<>();
-        navs.add(new HomeNav(NAV_TAG_VIP,  R.drawable.icon_back, "成为会员"));
-        navs.add(new HomeNav(NAV_TAG_BIND, R.drawable.icon_back, "绑定电表"));
-        navs.add(new HomeNav(NAV_TAG_ZS,  R.drawable.icon_back, "招商加盟"));
-        navs.add(new HomeNav(NAV_TAG_HZ, R.drawable.icon_back, "合作伙伴"));
+        navs.add(new HomeNav(NAV_TAG_VIP, R.drawable.hp_icon_vip, "成为会员"));
+        navs.add(new HomeNav(NAV_TAG_BIND, R.drawable.hp_icon_electric, "绑定电表"));
+        navs.add(new HomeNav(NAV_TAG_ZS, R.drawable.hp_icon_join, "招商加盟"));
+        navs.add(new HomeNav(NAV_TAG_HZ, R.drawable.hp_icon_cooperation, "合作伙伴"));
         navAdapter.setNewData(navs);
     }
 

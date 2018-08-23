@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseFragment;
 import com.hayikeji.ddmananger.base.BindLayout;
+import com.hayikeji.ddmananger.ui.activity.bind.BindDevActivity;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 /**
@@ -50,6 +51,7 @@ public class UnBindDevFragment extends BaseFragment {
         super.widgetClick(v);
         switch (v.getId()) {
             case R.id.item_bind_e_tv_to_bind:
+                startActivity(BindDevActivity.class);
                 break;
         }
     }

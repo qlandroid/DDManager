@@ -40,8 +40,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="请输入账号"
-                    android:inputType="number"
-                    android:maxLength="10"
+                    android:maxLength="20"
                     android:paddingBottom="@dimen/margin_normal"
                     android:paddingLeft="8dp"
                     android:paddingTop="@dimen/margin_normal"
@@ -81,7 +80,7 @@
                     android:background="@null"
                     android:hint="请输入手机号"
                     android:inputType="number"
-                    android:maxLength="10"
+                    android:maxLength="11"
                     android:paddingBottom="@dimen/margin_normal"
                     android:paddingLeft="8dp"
                     android:paddingTop="@dimen/margin_normal"
@@ -122,8 +121,8 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="请输入密码"
-                    android:inputType="number"
-                    android:maxLength="10"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
                     android:paddingBottom="@dimen/margin_normal"
                     android:paddingLeft="8dp"
                     android:paddingTop="@dimen/margin_normal"
@@ -140,6 +139,7 @@
 
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"

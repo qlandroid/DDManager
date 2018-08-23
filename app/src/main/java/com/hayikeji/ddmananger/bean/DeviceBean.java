@@ -62,7 +62,7 @@ public class DeviceBean implements IDevDetails {
     private String deviceAdmin;
     private String deviceAddress;
     private int usersId;
-    private int time;
+    private long time;
     private int money;
     private int balance;
     private int dStatus;
@@ -78,7 +78,7 @@ public class DeviceBean implements IDevDetails {
     private int humidity;
     private int detectionsign;
     private int version;
-    private int updatetime;
+    private long updatetime;
     private String nickname;
     private int elecStatus;
     private int replaceStatus;
@@ -185,7 +185,7 @@ public class DeviceBean implements IDevDetails {
         this.usersId = usersId;
     }
 
-    public int getTime() {
+    public long getTime() {
         return time;
     }
 
@@ -313,11 +313,11 @@ public class DeviceBean implements IDevDetails {
         this.version = version;
     }
 
-    public int getUpdatetime() {
+    public long getUpdatetime() {
         return updatetime;
     }
 
-    public void setUpdatetime(int updatetime) {
+    public void setUpdatetime(long updatetime) {
         this.updatetime = updatetime;
     }
 

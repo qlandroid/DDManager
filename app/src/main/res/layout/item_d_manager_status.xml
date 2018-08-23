@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/item_d_manager_status_tv_label"
-            android:layout_width="64sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="label"
             android:textSize="14sp" />

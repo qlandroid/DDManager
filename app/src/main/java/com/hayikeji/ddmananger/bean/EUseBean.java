@@ -10,7 +10,16 @@ package com.hayikeji.ddmananger.bean;
 public class EUseBean {
 
     private int day;
+    private int year;
     private long totalE;
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
 
     public int getDay() {
         return day;

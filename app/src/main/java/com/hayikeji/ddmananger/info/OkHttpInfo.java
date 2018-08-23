@@ -45,6 +45,15 @@ public class OkHttpInfo {
 
     }
 
+    public static void initClient(){
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        OkHttpClient build = builder.connectTimeout(TIME_OUT, TimeUnit.MILLISECONDS)
+                .readTimeout(TIME_OUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(TIME_OUT, TimeUnit.MILLISECONDS)
+                .build();
+        OkHttpUtils.initClient(build);
+    }
+
     /**
      * 添加证书
      *
