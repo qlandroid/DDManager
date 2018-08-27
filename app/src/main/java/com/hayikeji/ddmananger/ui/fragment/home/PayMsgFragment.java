@@ -21,7 +21,11 @@ import com.hayikeji.ddmananger.ui.adapter.PayMsgAdapter;
 import com.hayikeji.ddmananger.utils.DataUtils;
 import com.hayikeji.ddmananger.utils.ViewUtils;
 import com.hayikeji.ddmananger.utils.div.DividerItemDecoration;
+import com.hayikeji.ddmananger.utils.eventbus.ChangeDetailsEventBus;
 import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +63,7 @@ public class PayMsgFragment extends BaseFragment implements BaseQuickAdapter.Req
     @Override
     protected void initWidget(View view) {
         super.initWidget(view);
+        ChangeDetailsEventBus.getInstance().register(this);
         loadEndView = ViewUtils.getLoadEndView(getContext());
         payMsgAdapter = new PayMsgAdapter();
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -69,6 +74,13 @@ public class PayMsgFragment extends BaseFragment implements BaseQuickAdapter.Req
         loadMore();
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void changeDetails(Integer i) {
+        page.setPageNum(1);
+        warnList.clear();
+        loadMore();
+    }
 
     @Override
     public void onLoadMoreRequested() {
@@ -117,5 +129,11 @@ public class PayMsgFragment extends BaseFragment implements BaseQuickAdapter.Req
                 }
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ChangeDetailsEventBus.getInstance().unregister(this);
     }
 }

@@ -1,13 +1,17 @@
 package com.hayikeji.ddmananger.ui.activity.bind;
 
+import android.app.Activity;
 import android.ql.bindview.BindView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.hayikeji.ddmananger.C;
+import com.hayikeji.ddmananger.MyApp;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseActivity;
 import com.hayikeji.ddmananger.base.BindLayout;
@@ -17,19 +21,20 @@ import com.hayikeji.ddmananger.http.OkHttpHeader;
 import com.hayikeji.ddmananger.http.ResultCallback2;
 import com.hayikeji.ddmananger.info.UrlApi;
 import com.hayikeji.ddmananger.utils.DataUtils;
+import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@BindLayout(layoutRes = R.layout.activity_bind_top_up,title = "绑定并充值")
+@BindLayout(layoutRes = R.layout.activity_bind_top_up, title = "绑定并充值")
 public class BindTopUpActivity extends BaseActivity {
 
     @BindView(R.id.activity_bind_top_up_tv_dev_code)
     TextView tvDevCode;
-    @BindView(R.id.activity_bind_top_up_tv_address)
-    TextView tvAddress;
+    @BindView(R.id.activity_bind_top_up_tv_dev_name)
+    TextView tvDevName;
     @BindView(R.id.activity_bind_top_up_tv_owner_name)
     TextView tvOwnerName;
     @BindView(R.id.activity_bind_top_up_tv_unit_price)
@@ -86,6 +91,9 @@ public class BindTopUpActivity extends BaseActivity {
                 tvPayAmount.setText(String.format("%.2f", v1));
             }
         });
+        code = getBundle().getString("devCode");
+
+        httpGetDevDetails(code);
     }
 
 
@@ -118,6 +126,7 @@ public class BindTopUpActivity extends BaseActivity {
                     tvDevCode.setText(resultObj.getCode());
                     tvRoom.setText(resultObj.getDevRoom());
                     tvOwnerName.setText(resultObj.getDevOwner());
+                    tvDevName.setText(resultObj.getDevName());
                     return;
                 }
                 new QMUIDialog.MessageDialogBuilder(BindTopUpActivity.this)
@@ -141,6 +150,41 @@ public class BindTopUpActivity extends BaseActivity {
         super.forbidClick(v);
         switch (v.getId()) {
             case R.id.activity_bind_top_up_tv_to_pay:
+                String s = etPayPrice.getText().toString();
+                if (TextUtils.isEmpty(s)) {
+                    return;
+                }
+                Map<String, Object> map = new HashMap<>();
+                map.put("userId", UserDevPreferences.getUserId(this));
+                map.put("devCode", code);
+                map.put("buyPrice", Integer.parseInt(etPayPrice.getText().toString()));
+                OkHttpHeader.post(UrlApi.bindDev, map, new ResultCallback2() {
+                    @Override
+                    protected void onFailed(String error, int code) {
+                        cancelLoadingDialog();
+                        displayMessageDialog(error);
+                    }
+
+                    @Override
+                    protected void onSuccess(BaseResult response, int id) {
+                        cancelLoadingDialog();
+                        if (!response.isSuccess()) {
+                            displayMessageDialog(response.getMessage());
+                            return;
+                        }
+
+                        displayTipDialogSuccess("绑定成功");
+                        MyApp.refreshUserDetails();
+                        MyApp.refreshUserDev();
+                        C.sHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                setResult(Activity.RESULT_OK);
+                                finish();
+                            }
+                        }, 1_000);
+                    }
+                });
                 break;
         }
     }

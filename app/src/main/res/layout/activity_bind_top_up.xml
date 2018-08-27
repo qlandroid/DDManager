@@ -62,11 +62,11 @@
                     <TextView
                         android:layout_width="60sp"
                         android:layout_height="wrap_content"
-                        android:text="详细地址"
+                        android:text="设备名称"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/activity_bind_top_up_tv_address"
+                        android:id="@+id/activity_bind_top_up_tv_dev_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"

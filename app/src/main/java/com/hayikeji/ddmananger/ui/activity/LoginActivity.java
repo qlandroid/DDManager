@@ -3,11 +3,13 @@ package com.hayikeji.ddmananger.ui.activity;
 import android.ql.bindview.BindView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.zxing.common.StringUtils;
+import com.hayikeji.ddmananger.C;
 import com.hayikeji.ddmananger.MyApp;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseActivity;
@@ -21,6 +23,7 @@ import com.hayikeji.ddmananger.utils.CheckUtils;
 import com.hayikeji.ddmananger.utils.DataUtils;
 import com.hayikeji.ddmananger.utils.DateUtils;
 import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +46,13 @@ public class LoginActivity extends BaseActivity {
 
 
     @Override
+    public void initBar() {
+        super.initBar();
+        QMUIStatusBarHelper.translucent(this);
+        QMUIStatusBarHelper.setStatusBarLightMode(this);
+    }
+
+    @Override
     public void initWidget() {
         super.initWidget();
         tvReg.setOnClickListener(this);
@@ -50,6 +60,10 @@ public class LoginActivity extends BaseActivity {
         tvLogin.setOnClickListener(this);
         etAccount.setText("15601953393");
         etPw.setText("123456");
+
+        ViewGroup.LayoutParams layoutParams = iv.getLayoutParams();
+        layoutParams.height = C.SCREEN_HEIGHT_9;
+        iv.setLayoutParams(layoutParams);
     }
 
 

@@ -6,14 +6,22 @@ import android.ql.bindview.BindView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseActivity;
 import com.hayikeji.ddmananger.base.BindLayout;
+import com.hayikeji.ddmananger.bean.BaseResult;
+import com.hayikeji.ddmananger.bean.DeviceBean;
+import com.hayikeji.ddmananger.http.OkHttpHeader;
+import com.hayikeji.ddmananger.http.ResultCallback2;
+import com.hayikeji.ddmananger.info.UrlApi;
 import com.hayikeji.ddmananger.ui.adapter.bean.IMonth;
 import com.hayikeji.ddmananger.ui.adapter.MonthSelectAdapter;
+import com.hayikeji.ddmananger.utils.DataUtils;
 import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
 
 import java.util.ArrayList;
@@ -30,8 +38,20 @@ public class PayVipActivity extends BaseActivity {
     RecyclerView rvMonthSelect;
     @BindView(R.id.activity_pay_vip_tv_dev_select)
     View vDevSelect;
-    @BindView(R.id.activity_pay_e_tv_to_pay)
+    @BindView(R.id.activity_pay_vip_tv_to_pay)
     View vToPay;
+
+    @BindView(R.id.activity_pay_vip_tv_dev_code)
+    TextView tvDevCode;
+    @BindView(R.id.activity_pay_vip_tv_owner_name)
+    TextView tvOwnerName;
+    @BindView(R.id.activity_pay_vip_tv_room)
+    TextView tvRoom;
+    @BindView(R.id.activity_pay_vip_tv_dev_name)
+    TextView tvDevName;
+    @BindView(R.id.activity_pay_e_tv_pay_price)
+    TextView tvPayPrice;
+
 
     MonthSelectAdapter monthSelectAdapter = new MonthSelectAdapter();
 
@@ -39,7 +59,7 @@ public class PayVipActivity extends BaseActivity {
     @Override
     public void initBar() {
         super.initBar();
-        mTopBar.addRightTextButton("历史记录", R.id.top_bar_right_btn).setOnClickListener(this);
+       // mTopBar.addRightTextButton("历史记录", R.id.top_bar_right_btn).setOnClickListener(this);
     }
 
     @Override
@@ -49,9 +69,9 @@ public class PayVipActivity extends BaseActivity {
         l.add(new Month("1个月", 1));
         l.add(new Month("2个月", 2));
         l.add(new Month("3个月", 3));
-        l.add(new Month("半年", 4));
-        l.add(new Month("一年", 5));
-        l.add(new Month("二难念", 6));
+        l.add(new Month("半年", 6));
+        l.add(new Month("一年", 12));
+        l.add(new Month("两年", 24));
         monthSelectAdapter.setNewData(l);
     }
 
@@ -61,9 +81,26 @@ public class PayVipActivity extends BaseActivity {
         map.put("userId", UserDevPreferences.getUserId(this));
         map.put("devId", UserDevPreferences.getSelectDev(this));
 
+        OkHttpHeader.post(UrlApi.dev, map, new ResultCallback2() {
+            @Override
+            protected void onFailed(String error, int code) {
+
+            }
+
+            @Override
+            protected void onSuccess(BaseResult response, int id) {
+                if (response.isSuccess()) {
+                    DeviceBean resultObj = DataUtils.getResultObj(response.getData(), DeviceBean.class);
+                    setTextView(resultObj.getDevOwner(), tvOwnerName)
+                            .setTextView(resultObj.getCode(), tvDevCode)
+                            .setTextView(resultObj.getDevRoom(), tvRoom)
+                            .setTextView(resultObj.getNickname(), tvDevName);
+                }
+            }
+        });
     }
 
-    private void httpLoadPrice(){
+    private void httpLoadPrice() {
 
     }
 
@@ -72,16 +109,21 @@ public class PayVipActivity extends BaseActivity {
         super.initWidget();
         vToPay.setOnClickListener(this);
         vDevSelect.setOnClickListener(this);
-        rvMonthSelect.setLayoutManager(new GridLayoutManager(this, 4));
+        rvMonthSelect.setLayoutManager(new GridLayoutManager(this, 3));
         rvMonthSelect.setAdapter(monthSelectAdapter);
-
+        IMonth iMonth = monthSelectAdapter.getData().get(0);
+        tvPayPrice.setText((iMonth.getTag() * 2) + "");
         monthSelectAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                monthSelectAdapter.setSelecTag(position);
+                Month o = (Month) adapter.getData().get(position);
+                int i = o.getTag() * 2;
+                tvPayPrice.setText(i + "");
+                monthSelectAdapter.setSelectPostion(position);
                 monthSelectAdapter.notifyDataSetChanged();
             }
         });
+        httpLoadDevDetaila();
     }
 
     @Override
@@ -91,7 +133,32 @@ public class PayVipActivity extends BaseActivity {
             case R.id.activity_pay_vip_tv_dev_select:
                 startActivity(DevListSelectActivity.class, REQUEST_DEV_SELECT);
                 break;
-            case R.id.activity_pay_e_tv_to_pay:
+            case R.id.activity_pay_vip_tv_to_pay:
+                int selectTag = monthSelectAdapter.getSelectTag();
+                Month m = (Month) monthSelectAdapter.getData().get(selectTag);
+                displayLoadingDialog("提交中");
+                Map<String, Object> map = new HashMap<>();
+                map.put("userId", UserDevPreferences.getUserId(this));
+                map.put("devId", UserDevPreferences.getSelectDev(this));
+                map.put("buyCount", m.getTag());
+
+                OkHttpHeader.post(UrlApi.devVIP, map, new ResultCallback2() {
+                    @Override
+                    protected void onFailed(String error, int code) {
+                        cancelLoadingDialog();
+                        displayMessageDialog(error);
+                    }
+
+                    @Override
+                    protected void onSuccess(BaseResult response, int id) {
+                        cancelLoadingDialog();
+                        if (!response.isSuccess()) {
+                            displayMessageDialog(response.getMessage());
+                            return;
+                        }
+                        displayTipDialogSuccess("成为VIP成功");
+                    }
+                });
                 break;
         }
     }
@@ -104,7 +171,7 @@ public class PayVipActivity extends BaseActivity {
                     return;
                 }
                 int devId = DevListSelectActivity.getDevId(data);
-                UserDevPreferences.saveSelectDev(this,devId);
+                UserDevPreferences.saveSelectDev(this, devId);
                 httpLoadDevDetaila();
                 break;
             default:
@@ -123,12 +190,12 @@ public class PayVipActivity extends BaseActivity {
 
         @Override
         public int getTag() {
-            return 0;
+            return tag;
         }
 
         @Override
         public CharSequence getMonthStr() {
-            return null;
+            return monthStr;
         }
     }
 }

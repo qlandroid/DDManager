@@ -28,6 +28,7 @@ public class C {
      * 宽高比例为  4:3
      */
     public static int SCREEN_HEIGHT_3;
+    public static int SCREEN_HEIGHT_9;
 
 
     public static String DEV_CODE = "devCode";

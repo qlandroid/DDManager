@@ -8,10 +8,11 @@
     tools:context=".ui.activity.LoginActivity">
 
     <ImageView
+        android:scaleType="fitXY"
         android:id="@+id/activity_login_iv"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:src="@drawable/ic_launcher_background" />
+        android:src="@drawable/banner" />
 
     <LinearLayout
         android:id="@+id/activity_login_input_content_group"

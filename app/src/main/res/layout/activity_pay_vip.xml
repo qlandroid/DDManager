@@ -44,7 +44,8 @@
                             android:text="设备号码:" />
 
                         <TextView
-                            android:id="@+id/activity_pay_e_tv_dev_code"
+                            android:layout_marginLeft="6dp"
+                            android:id="@+id/activity_pay_vip_tv_dev_code"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />
@@ -70,7 +71,7 @@
                             android:text="设备名称:" />
 
                         <TextView
-                            android:id="@+id/activity_pay_e_tv_dev_name"
+                            android:id="@+id/activity_pay_vip_tv_dev_name"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -97,7 +98,7 @@
                             android:text="户主名称:" />
 
                         <TextView
-                            android:id="@+id/activity_pay_e_tv_owner_name"
+                            android:id="@+id/activity_pay_vip_tv_owner_name"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -124,7 +125,7 @@
                             android:text="门牌号:" />
 
                         <TextView
-                            android:id="@+id/activity_pay_e_tv_room"
+                            android:id="@+id/activity_pay_vip_tv_room"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -197,6 +198,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
+                        android:text="2"
                         android:textColor="@color/text_red_color" />
 
                     <TextView
@@ -267,7 +269,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/activity_pay_e_tv_to_pay"
+            android:id="@+id/activity_pay_vip_tv_to_pay"
             style="@style/btnNormal"
             android:layout_width="match_parent"
             android:layout_height="48dp"

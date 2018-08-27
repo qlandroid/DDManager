@@ -41,6 +41,8 @@ public class MyApp extends MultiDexApplication {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         C.SCREEN_WIDTH = displayMetrics.widthPixels;
         C.SCREEN_HEIGHT = displayMetrics.heightPixels;
+        C.SCREEN_HEIGHT_3 = (int)(C.SCREEN_WIDTH * 3.0f / 4);
+        C.SCREEN_HEIGHT_9 = (int)(C.SCREEN_WIDTH * 9.0f / 16);
     }
 
 

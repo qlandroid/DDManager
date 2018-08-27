@@ -56,6 +56,9 @@ public class MyFragment extends BaseFragment {
     private static final int NAV_MENU_E_PAY = 6;
     private static final int NAV_MENU_E_RECORD = 7;
     private static final int NAV_MENU_APP_VERSION = 8;
+    private static final int NAV_MENU_P = 9;//加盟
+    public static final int NAV_MENU_S = 10;//招商加盟
+    private static final int NAV_MENU_SERVICE = 11;//客服热线
 
 
     @BindView(R.id.frag_my_tv_dev_count)
@@ -96,7 +99,7 @@ public class MyFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void regEventBus(Integer i) {
-        tvDevCount.setText(UserDevPreferences.getDevCount(getContext()));
+        tvDevCount.setText(UserDevPreferences.getDevCount(getContext()) + "");
         tvInDate.setText(UserDevPreferences.getInDate(getContext()));
         String userNickName = UserDevPreferences.getUserNickName(getContext());
         if (TextUtils.isEmpty(userNickName)) {
@@ -165,6 +168,8 @@ public class MyFragment extends BaseFragment {
         });
 
         rvGridNav.setAdapter(gridNavAdapter);
+
+        regEventBus(1);
     }
 
 
@@ -189,9 +194,9 @@ public class MyFragment extends BaseFragment {
         list.add(new BottomNavBean("电力缴费", R.drawable.hp_icon_vip, NAV_MENU_E_PAY, MyNavAdapter.S_DIV));
         list.add(new BottomNavBean("历史电量", R.drawable.hp_icon_vip, NAV_MENU_E_RECORD, MyNavAdapter.SINGLE));
         list.add(new BottomNavBean());
-        list.add(new BottomNavBean("合作伙伴", R.drawable.hp_icon_cooperation, NAV_MENU_E_RECORD, MyNavAdapter.S_DIV));
-        list.add(new BottomNavBean("招商加盟", R.drawable.hp_icon_join, NAV_MENU_E_RECORD, MyNavAdapter.S_DIV));
-        list.add(new BottomNavBean("客户热线", R.drawable.hp_icon_vip, NAV_MENU_E_RECORD, MyNavAdapter.SINGLE));
+        list.add(new BottomNavBean("合作伙伴", R.drawable.hp_icon_cooperation, NAV_MENU_P, MyNavAdapter.S_DIV));
+        list.add(new BottomNavBean("招商加盟", R.drawable.hp_icon_join, NAV_MENU_S, MyNavAdapter.S_DIV));
+        list.add(new BottomNavBean("客户热线", R.drawable.hp_icon_vip, NAV_MENU_SERVICE, MyNavAdapter.SINGLE));
         list.add(new BottomNavBean());
         list.add(new BottomNavBean("版本号", R.drawable.hp_icon_vip, NAV_MENU_APP_VERSION, MyNavAdapter.SINGLE));
 
@@ -231,6 +236,12 @@ public class MyFragment extends BaseFragment {
                         }
                         startActivity(PayVipActivity.class);
                         break;
+                    case NAV_MENU_P:
+                    case NAV_MENU_S:
+                    case NAV_MENU_SERVICE:
+                        toast("暂未开放，努力开发中");
+                        break;
+
                 }
             }
         });

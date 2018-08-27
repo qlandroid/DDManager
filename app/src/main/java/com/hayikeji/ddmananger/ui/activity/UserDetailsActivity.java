@@ -38,8 +38,10 @@ public class UserDetailsActivity extends BaseActivity {
         vSave.setOnClickListener(this);
         tvIndate.setText(UserDevPreferences.getInDate(this));
         etNickName.setText(UserDevPreferences.getUserNickName(this));
+        if (etNickName.length() != 0) {
 
-        etNickName.setSelection(0, etNickName.length() - 1);
+            etNickName.setSelection(0, etNickName.length() - 1);
+        }
     }
 
 
@@ -57,7 +59,7 @@ public class UserDetailsActivity extends BaseActivity {
                 Map<String, Object> map = new HashMap<>();
 
                 map.put("userId", UserDevPreferences.getUserId(this));
-                map.put("nickName", text.toString());
+                map.put("vNickName", text.toString());
 
                 OkHttpHeader.post(UrlApi.user_set_details, map, new ResultCallback2() {
                     @Override

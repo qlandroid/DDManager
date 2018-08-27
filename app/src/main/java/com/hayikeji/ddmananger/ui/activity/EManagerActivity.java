@@ -82,8 +82,6 @@ public class EManagerActivity extends BaseActivity implements BaseQuickAdapter.O
         switch (view.getId()) {
             case R.id.item_e_close_manager_tv_open://开关权限
                 checkUserVipByDev((ECloseManager) adapter.getData().get(position));
-
-
                 break;
             case R.id.item_e_close_manager_tv_assign_power://权限分配
                 IECloseManager ieCloseManager2 = (IECloseManager) (adapter.getData().get(position));
@@ -113,6 +111,7 @@ public class EManagerActivity extends BaseActivity implements BaseQuickAdapter.O
                 cancelLoadingDialog();
                 if (!response.isSuccess()) {
                     displayMessageDialog(response.getMessage());
+                    return;
                 }
                 if (closeManager.isCanSwitch()) {
                     if (eManagerDialog == null) {

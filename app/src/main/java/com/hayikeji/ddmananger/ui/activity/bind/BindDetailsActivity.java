@@ -1,5 +1,7 @@
 package com.hayikeji.ddmananger.ui.activity.bind;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.ql.bindview.BindView;
 import android.view.View;
@@ -37,6 +39,7 @@ public class BindDetailsActivity extends BaseActivity {
     @BindView(R.id.activity_bind_details_tv_room)
     TextView tvRoom;
     private DeviceBean resultObj;
+    private final int REQUEST_BIND = 22;
 
 
     @Override
@@ -105,11 +108,24 @@ public class BindDetailsActivity extends BaseActivity {
                 String s = tvDevCode.getText().toString();
                 Bundle b = new Bundle();
                 b.putString(C.DEV_CODE, s);
-                startActivity(BindTopUpActivity.class, b);
+                startActivity(BindTopUpActivity.class, b, REQUEST_BIND);
                 break;
             case R.id.activity_bind_details_tv_cancel:
                 finish();
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_BIND:
+                if (resultCode == Activity.RESULT_OK) {
+                    finish();
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

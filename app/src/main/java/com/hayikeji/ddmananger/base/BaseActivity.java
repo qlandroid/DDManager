@@ -33,7 +33,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hayikeji.ddmananger.C;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.utils.ActivityUtils;
@@ -439,7 +438,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                     return;
                 }
                 String resultContent = CaptureActivity.getResultContent(data);
-                onResultCord(resultContent);
+                onResultCode(resultContent);
                 break;
             case REQUEST_IMAGE:
                 if (resultCode != Activity.RESULT_OK) {
@@ -465,7 +464,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public void onResultCord(String resultContent) {
+    public void onResultCode(String resultContent) {
     }
 
 
@@ -508,12 +507,12 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    public BaseActivity setTextView(String s, TextView tv) {
+    public BaseActivity setTextView(CharSequence s, TextView tv) {
         setTextView(s, "", tv);
         return this;
     }
 
-    public BaseActivity setTextView(String s, String normal, TextView tv) {
+    public BaseActivity setTextView(CharSequence s, String normal, TextView tv) {
         if (TextUtils.isEmpty(s)) {
             s = normal;
         }
@@ -702,7 +701,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                      * 你又弹个授权框，你需要给用户一个解释，为什么要授权，则使用该方法。
                      */
                     //ToastUtils.show(this, "没有权限");
-                    displayMessageDialog("没有权限");
+                    displayMessageDialog("请前往应用设置，中赋予摄像头权限");
                 } else {
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_ASK_CAMERA);
                 }

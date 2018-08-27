@@ -11,10 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.hayikeji.ddmananger.C;
 import com.hayikeji.ddmananger.R;
 import com.hayikeji.ddmananger.base.BaseFragment;
 import com.hayikeji.ddmananger.base.BindLayout;
@@ -26,12 +28,12 @@ import com.hayikeji.ddmananger.http.ResultCallback;
 import com.hayikeji.ddmananger.info.UrlApi;
 import com.hayikeji.ddmananger.ui.HomeNav;
 import com.hayikeji.ddmananger.ui.IGrid;
-import com.hayikeji.ddmananger.ui.activity.DevListSelectActivity;
+import com.hayikeji.ddmananger.ui.activity.PayVipActivity;
+import com.hayikeji.ddmananger.ui.activity.bind.BindDevActivity;
 import com.hayikeji.ddmananger.ui.adapter.GridAdapter;
 import com.hayikeji.ddmananger.ui.adapter.HomeContentAdapter;
 import com.hayikeji.ddmananger.utils.DataUtils;
 import com.hayikeji.ddmananger.utils.JsonUtils;
-import com.hayikeji.ddmananger.utils.PreferencesUtils;
 import com.hayikeji.ddmananger.utils.preferences.UserDevPreferences;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.youth.banner.Banner;
@@ -59,7 +61,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @BindView(R.id.srl)
     SwipeRefreshLayout srl;
     @BindView(R.id.frag_home_banner)
-    Banner banner;
+    ImageView banner;
     @BindView(R.id.frag_home_rv_nav)
     RecyclerView rvNav;
     @BindView(R.id.frag_home_rv_content)
@@ -96,6 +98,11 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         rvNav.setLayoutManager(new GridLayoutManager(getContext(), 4));
         initNav();
         rvNav.setAdapter(navAdapter);
+        ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
+        layoutParams.height = C.SCREEN_HEIGHT_9;
+        banner.setLayoutParams(layoutParams);
+
+
 
         navAdapter.setOnItemClickListener(this);
 
@@ -189,10 +196,14 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         IGrid iGrid = data.get(position);
         switch (iGrid.getTag()) {
             case NAV_TAG_VIP:
-                toast("成为会员");
+                if (!UserDevPreferences.isHasDev(getContext())) {
+                    displayMessageDialog("未绑定设备");
+                    return;
+                }
+                startActivity(PayVipActivity.class);
                 break;
             case NAV_TAG_BIND:
-                toast("绑定");
+                startActivity(BindDevActivity.class);
                 break;
             case NAV_TAG_HZ:
                 toast("合作伙伴");
