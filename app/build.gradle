@@ -4,7 +4,7 @@ android {
     compileSdkVersion rootProject.ext.sdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        applicationId "com.hayikeji.ddmananger"
+        applicationId "com.hayikeji.ddmanager"
         minSdkVersion 15
         targetSdkVersion rootProject.ext.sdkVersion
         versionCode 1
@@ -52,6 +52,7 @@ dependencies {
     compile project(':multi-image-selector')
     compile 'com.youth.banner:banner:1.4.4'
     compile 'com.orhanobut:logger:2.2.0'
+    compile 'com.github.bumptech.glide:glide:3.5.2'
 
     //https://github.com/liaoinstan/SpringView
     //compile 'com.liaoinstan.springview:library:1.5.0'

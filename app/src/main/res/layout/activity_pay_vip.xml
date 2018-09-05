@@ -17,9 +17,9 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:layout_marginTop="@dimen/margin_normal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal">
 
 
                 <LinearLayout
@@ -44,10 +44,10 @@
                             android:text="设备号码:" />
 
                         <TextView
-                            android:layout_marginLeft="6dp"
                             android:id="@+id/activity_pay_vip_tv_dev_code"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
                             android:layout_weight="1" />
 
 
@@ -136,21 +136,22 @@
 
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/activity_pay_vip_tv_dev_select"
-                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/s_bg_div_blue"
                     android:clickable="true"
+                    android:paddingBottom="4dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
-                    android:layout_gravity="right"
                     android:text="设备选择"
-                    android:background="@drawable/s_bg_div_blue"
-                    android:textColor="@color/s_btn_blue_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/s_btn_blue_text" />
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -249,22 +250,40 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/activity_pay_vip_agreement_group"
+            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="6dp"
             android:layout_marginTop="6dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/activity_pay_vip_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_yes_black" />
+                android:src="@drawable/s_rb" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已经阅读《会员协议》并同意协议"
+                android:text="已经阅读"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/activity_pay_vip_tv_a"
+                android:textColor="@color/color_theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《会员协议》"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="并同意协议"
                 android:textSize="12sp" />
         </LinearLayout>
 
