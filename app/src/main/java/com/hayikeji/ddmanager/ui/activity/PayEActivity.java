@@ -7,7 +7,9 @@ import android.ql.bindview.BindView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,9 +23,12 @@ import com.hayikeji.ddmanager.base.BindLayout;
 import com.hayikeji.ddmanager.bean.BaseResult;
 import com.hayikeji.ddmanager.bean.DeviceBean;
 import com.hayikeji.ddmanager.bean.PayTypeBean;
+import com.hayikeji.ddmanager.bean.PriceBean;
 import com.hayikeji.ddmanager.http.OkHttpHeader;
+import com.hayikeji.ddmanager.http.OkHttpHelper;
 import com.hayikeji.ddmanager.http.ResultCallback2;
 import com.hayikeji.ddmanager.info.UrlApi;
+import com.hayikeji.ddmanager.ui.adapter.bean.IMonth;
 import com.hayikeji.ddmanager.ui.adapter.bean.IPayType;
 import com.hayikeji.ddmanager.ui.adapter.PayTypeAdapter;
 import com.hayikeji.ddmanager.utils.DataUtils;
@@ -51,7 +56,7 @@ public class PayEActivity extends BaseActivity implements BaseQuickAdapter.OnIte
     @BindView(R.id.activity_pay_e_tv_e_amount)
     TextView tvEAmount;//剩余度数
     @BindView(R.id.activity_pay_e_tv_unit)
-    TextView tvUnit;//电表单价
+    TextView  tvUnit;//电表单价
     @BindView(R.id.activity_pay_e_et_pay_price)
     EditText etPayPrice;//充值金额
     @BindView(R.id.activity_pay_e_tv_pay_amount)
@@ -70,12 +75,18 @@ public class PayEActivity extends BaseActivity implements BaseQuickAdapter.OnIte
     ImageView ivAgreement;
 
     private PayTypeAdapter payTypeAdapter = new PayTypeAdapter();
-
+    private PriceBean priceBean = new PriceBean();
 
     @Override
     public void initBar() {
         super.initBar();
         mTopBar.addRightTextButton("历史记录", R.id.top_bar_right_btn).setOnClickListener(this);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        priceBean.setEleUnit(10);
     }
 
     @Override
@@ -85,6 +96,30 @@ public class PayEActivity extends BaseActivity implements BaseQuickAdapter.OnIte
         vSelectDev.setOnClickListener(this);
         vAgreement.setOnClickListener(this);
         vAgreementGroup.setOnClickListener(this);
+
+        etPayPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    double v = Double.parseDouble(s.toString());
+                    double priceUnit = priceBean.getEleUnit() * 1.0 / 100;
+                    double v1 = v * priceUnit;
+                    tvPayAmount.setText(String.format("%.2f", v1));
+                } catch (Exception e) {
+                    tvPayAmount.setText("0.00");
+                }
+            }
+        });
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -97,8 +132,37 @@ public class PayEActivity extends BaseActivity implements BaseQuickAdapter.OnIte
 
         payTypeAdapter.setOnItemClickListener(this);
         httpLoadDevDetaila();
+        httpPrice();
     }
 
+    private void httpPrice() {
+        OkHttpHelper.post(UrlApi.priceUnit, new HashMap<>(), new ResultCallback2() {
+            @Override
+            protected void onFailed(String error, int code) {
+
+            }
+
+            @Override
+            protected void onSuccess(BaseResult response, int id) {
+                if (!response.isSuccess()) {
+                    return;
+                }
+                priceBean = response.getDataO(PriceBean.class);
+                double priceUnit = priceBean.getEleUnit() * 1.0 / 100;
+                tvUnit.setText(String.format("%.2f", priceUnit));
+                String s = etPayPrice.getText().toString();
+
+                int mount;
+                try {
+                    mount = Integer.parseInt(s);
+                } catch (Exception e) {
+                    mount = 0;
+                }
+
+                tvPayAmount.setText(String.format("%.2f", mount * priceUnit));
+            }
+        });
+    }
 
     private void httpLoadDevDetaila() {
         Map<String, Object> map = new HashMap<>();

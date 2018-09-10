@@ -196,10 +196,11 @@
                         android:textColor="@color/text_red_color" />
 
                     <TextView
+                        android:id="@+id/activity_pay_vip_tv_price_unit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
-                        android:text="2"
+                        android:text="  "
                         android:textColor="@color/text_red_color" />
 
                     <TextView

@@ -11,8 +11,8 @@ package com.hayikeji.ddmanager.info;
  */
 public class UrlApi {
 
-        public static final String baseUrl = "http://182.254.145.142:10881";
-//    public static final String baseUrl = "http://192.168.0.101:10881";
+    public static final String baseUrl = "http://182.254.145.142:10881";
+//    public static final String baseUrl = "http://192.168.6.111:10881";
 
     public static String user_login = baseUrl + "/vuser/login";
     public static String user_reg = baseUrl + "/vuser/reg";
@@ -61,4 +61,6 @@ public class UrlApi {
     public static String shopping_goods_list = baseUrl + "/shopping/getGoodsList";
     public static String goods_details = baseUrl + "/shopping/getGoodsDetails";
     public static String payment = baseUrl + "/shopping/payment";
+    public static String priceUnit = baseUrl + "/pay/price";
+    public static String pay_vip_record = baseUrl + "/pay/payVipRecord";
 }

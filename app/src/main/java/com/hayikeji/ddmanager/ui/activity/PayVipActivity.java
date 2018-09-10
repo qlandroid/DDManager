@@ -19,7 +19,9 @@ import com.hayikeji.ddmanager.base.BaseActivity;
 import com.hayikeji.ddmanager.base.BindLayout;
 import com.hayikeji.ddmanager.bean.BaseResult;
 import com.hayikeji.ddmanager.bean.DeviceBean;
+import com.hayikeji.ddmanager.bean.PriceBean;
 import com.hayikeji.ddmanager.http.OkHttpHeader;
+import com.hayikeji.ddmanager.http.OkHttpHelper;
 import com.hayikeji.ddmanager.http.ResultCallback2;
 import com.hayikeji.ddmanager.info.UrlApi;
 import com.hayikeji.ddmanager.ui.adapter.bean.IMonth;
@@ -60,6 +62,10 @@ public class PayVipActivity extends BaseActivity {
     View vAgreementGroup;
     @BindView(R.id.activity_pay_vip_rb)
     ImageView ivSelected;
+    @BindView(R.id.activity_pay_vip_tv_price_unit)
+    TextView tvPriceUnit;
+
+    PriceBean priceBean;
 
 
     MonthSelectAdapter monthSelectAdapter = new MonthSelectAdapter();
@@ -68,12 +74,15 @@ public class PayVipActivity extends BaseActivity {
     @Override
     public void initBar() {
         super.initBar();
-        // mTopBar.addRightTextButton("历史记录", R.id.top_bar_right_btn).setOnClickListener(this);
+        mTopBar.addRightTextButton("历史记录", R.id.top_bar_right_btn).setOnClickListener(this);
     }
 
     @Override
     public void initData() {
         super.initData();
+        priceBean = new PriceBean();
+        priceBean.setEleUnit(100);
+        priceBean.setVipUnit(500);
         List<IMonth> l = new ArrayList<>();
         l.add(new Month("1个月", 1));
         l.add(new Month("2个月", 2));
@@ -109,10 +118,6 @@ public class PayVipActivity extends BaseActivity {
         });
     }
 
-    private void httpLoadPrice() {
-
-    }
-
     @Override
     public void initWidget() {
         super.initWidget();
@@ -123,25 +128,33 @@ public class PayVipActivity extends BaseActivity {
         rvMonthSelect.setLayoutManager(new GridLayoutManager(this, 3));
         rvMonthSelect.setAdapter(monthSelectAdapter);
         IMonth iMonth = monthSelectAdapter.getData().get(0);
-        tvPayPrice.setText((iMonth.getTag() * 2) + "");
+
+        double priceUnit = priceBean.getVipUnit() * 1.0 / 100;
+        tvPayPrice.setText(String.format("%.2f", priceUnit));
+        double v = iMonth.getTag() * priceBean.getVipUnit() * 1.0 / 100;
+        tvPayPrice.setText(String.format("%.2f", v));
+
         monthSelectAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Month o = (Month) adapter.getData().get(position);
-                int i = o.getTag() * 2;
-                tvPayPrice.setText(i + "");
+                double i = o.getTag() * priceBean.getVipUnit() * 1.0 / 100;
+                tvPayPrice.setText(String.format("%.2f", i));
                 monthSelectAdapter.setSelectPostion(position);
                 monthSelectAdapter.notifyDataSetChanged();
             }
         });
         httpLoadDevDetaila();
-
+        httpPrice();
     }
 
     @Override
     public void forbidClick(View v) {
         super.forbidClick(v);
         switch (v.getId()) {
+            case R.id.top_bar_right_btn:
+                startActivity(PayVipRecordActivity.class);
+                break;
             case R.id.activity_pay_vip_agreement_group:
                 boolean selected = ivSelected.isSelected();
                 ivSelected.setSelected(!selected);
@@ -149,7 +162,7 @@ public class PayVipActivity extends BaseActivity {
             case R.id.activity_pay_vip_tv_a:
                 Bundle w = new Bundle();
                 CommWebActivity.putUrl(UrlApi.agreement, "协议", w);
-                startActivity(CommWebActivity.class,w);
+                startActivity(CommWebActivity.class, w);
                 break;
             case R.id.activity_pay_vip_tv_dev_select:
                 startActivity(DevListSelectActivity.class, REQUEST_DEV_SELECT);
@@ -186,6 +199,28 @@ public class PayVipActivity extends BaseActivity {
                 });
                 break;
         }
+    }
+
+    private void httpPrice() {
+        OkHttpHelper.post(UrlApi.priceUnit, new HashMap<>(), new ResultCallback2() {
+            @Override
+            protected void onFailed(String error, int code) {
+
+            }
+
+            @Override
+            protected void onSuccess(BaseResult response, int id) {
+                if (!response.isSuccess()) {
+                    return;
+                }
+                priceBean = response.getDataO(PriceBean.class);
+                IMonth iMonth = monthSelectAdapter.getData().get(monthSelectAdapter.getSelectTag());
+                double priceUnit = priceBean.getVipUnit() * 1.0 / 100;
+                double v = iMonth.getTag() * priceUnit;
+                tvPayPrice.setText(String.format("%.2f", v));
+                tvPriceUnit.setText(String.format("%.2f", priceUnit));
+            }
+        });
     }
 
     @Override
