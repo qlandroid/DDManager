@@ -28,6 +28,7 @@ import com.hayikeji.ddmanager.http.ResultCallback;
 import com.hayikeji.ddmanager.info.UrlApi;
 import com.hayikeji.ddmanager.ui.HomeNav;
 import com.hayikeji.ddmanager.ui.IGrid;
+import com.hayikeji.ddmanager.ui.activity.CommWebActivity;
 import com.hayikeji.ddmanager.ui.activity.PayVipActivity;
 import com.hayikeji.ddmanager.ui.activity.bind.BindDevActivity;
 import com.hayikeji.ddmanager.ui.adapter.GridAdapter;
@@ -206,7 +207,9 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 startActivity(BindDevActivity.class);
                 break;
             case NAV_TAG_HZ:
-                toast("合作伙伴");
+                Bundle b = new Bundle();
+                CommWebActivity.putUrl(UrlApi.league_all, "合作伙伴", b);
+                startActivity(CommWebActivity.class, b);
                 break;
             case NAV_TAG_ZS:
                 startActivity(ShoppingHomeActivity.class);

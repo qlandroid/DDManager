@@ -33,6 +33,6 @@
         android:id="@+id/item_pay_type_iv_select"
         android:layout_width="26dp"
         android:layout_height="26dp"
-        android:src="@drawable/ic_launcher_background" />
+        android:src="@drawable/select" />
 
 </LinearLayout>

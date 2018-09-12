@@ -18,10 +18,21 @@ public class PayTypeAdapter extends BaseQuickAdapter<IPayType, QLViewHolder> {
         super(R.layout.item_pay_type);
     }
 
+    private int selectPosition = 0;
+
     @Override
     protected void convert(QLViewHolder helper, IPayType item) {
         helper.setText(R.id.item_pay_type_tv_name, item.getTypeName());
         helper.setImageResource(R.id.item_pay_type_iv, item.getTypeIconRes());
-        helper.getView(R.id.item_pay_type_iv_select).setVisibility(item.isSelect() ? View.VISIBLE : View.GONE);
+        helper.getView(R.id.item_pay_type_iv_select).setVisibility(helper.getAdapterPosition() == selectPosition ? View.VISIBLE : View.GONE);
+    }
+
+    public int getSelectPosition() {
+        return selectPosition;
+    }
+
+    public void setSelectPosition(int selectPosition) {
+        this.selectPosition = selectPosition;
+        this.notifyDataSetChanged();
     }
 }

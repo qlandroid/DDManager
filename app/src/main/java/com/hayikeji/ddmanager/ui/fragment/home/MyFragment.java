@@ -246,6 +246,9 @@ public class MyFragment extends BaseFragment {
                         startActivity(CommWebActivity.class, bundle);
                         break;
                     case NAV_MENU_P:
+                        Bundle b2 = new Bundle();
+                        CommWebActivity.putUrl(UrlApi.league_all, "合作伙伴", b2);
+                        startActivity(CommWebActivity.class, b2);
                         break;
                     case NAV_MENU_SERVICE:
                         Bundle b = new Bundle();

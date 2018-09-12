@@ -49,6 +49,11 @@ public class PaymentActivity extends BaseActivity {
     EditText etName2;
     @BindView(R.id.activity_payment_et_bank_contact)
     EditText etBankContact;
+    @BindView(R.id.activity_payment_et_server_name)
+    EditText etServerName;//服务商名称
+    @BindView(R.id.activity_payment_et_ele_price)
+    EditText etElePrice;
+
 
     private int goodsId;
     private int price;
@@ -88,6 +93,7 @@ public class PaymentActivity extends BaseActivity {
                 resetPrice();
             }
         });
+        resetPrice();
     }
 
     @Override
@@ -107,6 +113,23 @@ public class PaymentActivity extends BaseActivity {
                 p.setReceAddress(etAddress2.getText().toString());
                 p.setConsignee(etName2.getText().toString());
                 p.setPhone(etPhone2.getText().toString());
+
+                p.setCategory(etServerName.getText().toString());
+                String s = etElePrice.getText().toString();
+                if (TextUtils.isEmpty(s)) {
+                    toast("请输入电费单价");
+                    return;
+                }
+                double v1 = 0;
+                try {
+                    v1 = Double.parseDouble(s);
+                } catch (Exception e) {
+                    toast("请输入电费单价");
+                    return;
+                }
+                int price = (int) (v1 * 100);
+                p.setPrice(price);
+
                 displayLoadingDialog("提交中");
                 OkHttpHeader.post(UrlApi.payment, p, new ResultCallback2() {
                     @Override

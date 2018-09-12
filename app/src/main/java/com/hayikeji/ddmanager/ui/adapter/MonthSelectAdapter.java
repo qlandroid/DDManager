@@ -16,20 +16,25 @@ public class MonthSelectAdapter extends BaseQuickAdapter<IMonth, QLViewHolder> {
         super(R.layout.item_text);
     }
 
-    private int selectPostion = 0;
+    private int selectPosition = 0;
 
     @Override
     protected void convert(QLViewHolder helper, IMonth item) {
-        boolean b = selectPostion == helper.getAdapterPosition();
+        boolean b = selectPosition == helper.getAdapterPosition();
         helper.getView(R.id.item_text_tv).setSelected(b);
         helper.setText(R.id.item_text_tv, item.getMonthStr());
     }
 
-    public int getSelectTag() {
-        return selectPostion;
+    public int getSelectPosition() {
+        return selectPosition;
     }
 
-    public void setSelectPostion(int selectPostion) {
-        this.selectPostion = selectPostion;
+    public void setSelectPosition(int selectPosition) {
+        this.selectPosition = selectPosition;
+    }
+
+    public int getTag() {
+        IMonth iMonth = this.getData().get(selectPosition);
+        return iMonth.getTag();
     }
 }

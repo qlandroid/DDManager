@@ -4,13 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.ql.bindview.BindView;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -19,13 +18,16 @@ import com.hayikeji.ddmanager.base.BaseActivity;
 import com.hayikeji.ddmanager.base.BindLayout;
 import com.hayikeji.ddmanager.bean.BaseResult;
 import com.hayikeji.ddmanager.bean.DeviceBean;
+import com.hayikeji.ddmanager.bean.PayTypeBean;
 import com.hayikeji.ddmanager.bean.PriceBean;
 import com.hayikeji.ddmanager.http.OkHttpHeader;
 import com.hayikeji.ddmanager.http.OkHttpHelper;
 import com.hayikeji.ddmanager.http.ResultCallback2;
 import com.hayikeji.ddmanager.info.UrlApi;
+import com.hayikeji.ddmanager.ui.adapter.PayTypeAdapter;
 import com.hayikeji.ddmanager.ui.adapter.bean.IMonth;
 import com.hayikeji.ddmanager.ui.adapter.MonthSelectAdapter;
+import com.hayikeji.ddmanager.ui.adapter.bean.IPayType;
 import com.hayikeji.ddmanager.utils.DataUtils;
 import com.hayikeji.ddmanager.utils.preferences.UserDevPreferences;
 
@@ -35,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 @BindLayout(layoutRes = R.layout.activity_pay_vip, title = "VIP开通")
-public class PayVipActivity extends BaseActivity {
+public class PayVipActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
 
     private static final int REQUEST_DEV_SELECT = 123;
 
@@ -64,12 +66,15 @@ public class PayVipActivity extends BaseActivity {
     ImageView ivSelected;
     @BindView(R.id.activity_pay_vip_tv_price_unit)
     TextView tvPriceUnit;
+    @BindView(R.id.activity_pay_vip_rv)
+    RecyclerView rvPay;
+
 
     PriceBean priceBean;
 
 
     MonthSelectAdapter monthSelectAdapter = new MonthSelectAdapter();
-
+    private PayTypeAdapter payTypeAdapter = new PayTypeAdapter();
 
     @Override
     public void initBar() {
@@ -134,13 +139,22 @@ public class PayVipActivity extends BaseActivity {
         double v = iMonth.getTag() * priceBean.getVipUnit() * 1.0 / 100;
         tvPayPrice.setText(String.format("%.2f", v));
 
+        rvPay.setLayoutManager(new LinearLayoutManager(this));
+        rvPay.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        List<IPayType> list = new ArrayList<>();
+        list.add(new PayTypeBean(true, "支付宝支付", R.drawable.pay_zhifubao_logo, 0));
+        list.add(new PayTypeBean(false, "微信支付", R.drawable.pay_weixin_logo, 1));
+        payTypeAdapter.setNewData(list);
+        rvPay.setAdapter(payTypeAdapter);
+
+        payTypeAdapter.setOnItemClickListener(this);
         monthSelectAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Month o = (Month) adapter.getData().get(position);
                 double i = o.getTag() * priceBean.getVipUnit() * 1.0 / 100;
                 tvPayPrice.setText(String.format("%.2f", i));
-                monthSelectAdapter.setSelectPostion(position);
+                monthSelectAdapter.setSelectPosition(position);
                 monthSelectAdapter.notifyDataSetChanged();
             }
         });
@@ -172,7 +186,7 @@ public class PayVipActivity extends BaseActivity {
                     toast("未同意协议");
                     return;
                 }
-                int selectTag = monthSelectAdapter.getSelectTag();
+                int selectTag = monthSelectAdapter.getSelectPosition();
                 Month m = (Month) monthSelectAdapter.getData().get(selectTag);
                 displayLoadingDialog("提交中");
                 Map<String, Object> map = new HashMap<>();
@@ -214,7 +228,7 @@ public class PayVipActivity extends BaseActivity {
                     return;
                 }
                 priceBean = response.getDataO(PriceBean.class);
-                IMonth iMonth = monthSelectAdapter.getData().get(monthSelectAdapter.getSelectTag());
+                IMonth iMonth = monthSelectAdapter.getData().get(monthSelectAdapter.getSelectPosition());
                 double priceUnit = priceBean.getVipUnit() * 1.0 / 100;
                 double v = iMonth.getTag() * priceUnit;
                 tvPayPrice.setText(String.format("%.2f", v));
@@ -236,6 +250,21 @@ public class PayVipActivity extends BaseActivity {
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        PayTypeBean o = (PayTypeBean) adapter.getData().get(position);
+        int selectTag = monthSelectAdapter.getTag();
+        payTypeAdapter.setSelectPosition(position);
+        switch (o.getTag()) {
+            case 0://支付宝支付
+                toast("支付宝支付 -- " + selectTag);
+                break;
+            case 1://微信支付
+                toast("微信支付 -- " + selectTag);
+                break;
         }
     }
 

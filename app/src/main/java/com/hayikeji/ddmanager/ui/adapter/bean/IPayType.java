@@ -13,7 +13,6 @@ public interface IPayType {
 
     int getTag();
 
-    boolean isSelect();
 
     CharSequence getTypeName();
 

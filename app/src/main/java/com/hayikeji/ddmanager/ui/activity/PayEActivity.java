@@ -28,9 +28,8 @@ import com.hayikeji.ddmanager.http.OkHttpHeader;
 import com.hayikeji.ddmanager.http.OkHttpHelper;
 import com.hayikeji.ddmanager.http.ResultCallback2;
 import com.hayikeji.ddmanager.info.UrlApi;
-import com.hayikeji.ddmanager.ui.adapter.bean.IMonth;
-import com.hayikeji.ddmanager.ui.adapter.bean.IPayType;
 import com.hayikeji.ddmanager.ui.adapter.PayTypeAdapter;
+import com.hayikeji.ddmanager.ui.adapter.bean.IPayType;
 import com.hayikeji.ddmanager.utils.DataUtils;
 import com.hayikeji.ddmanager.utils.eventbus.ChangeDetailsEventBus;
 import com.hayikeji.ddmanager.utils.preferences.UserDevPreferences;
@@ -39,7 +38,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CancellationException;
 
 @BindLayout(layoutRes = R.layout.activity_pay_e, title = "电量充值")
 public class PayEActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
@@ -56,7 +54,7 @@ public class PayEActivity extends BaseActivity implements BaseQuickAdapter.OnIte
     @BindView(R.id.activity_pay_e_tv_e_amount)
     TextView tvEAmount;//剩余度数
     @BindView(R.id.activity_pay_e_tv_unit)
-    TextView  tvUnit;//电表单价
+    TextView tvUnit;//电表单价
     @BindView(R.id.activity_pay_e_et_pay_price)
     EditText etPayPrice;//充值金额
     @BindView(R.id.activity_pay_e_tv_pay_amount)
@@ -124,9 +122,8 @@ public class PayEActivity extends BaseActivity implements BaseQuickAdapter.OnIte
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         List<IPayType> list = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            list.add(new PayTypeBean(false, "item--" + i, R.drawable.ic_launcher_background, i));
-        }
+        list.add(new PayTypeBean(true, "支付宝支付", R.drawable.pay_zhifubao_logo, 0));
+        list.add(new PayTypeBean(false, "微信支付", R.drawable.pay_weixin_logo, 1));
         payTypeAdapter.setNewData(list);
         rv.setAdapter(payTypeAdapter);
 
@@ -254,7 +251,16 @@ public class PayEActivity extends BaseActivity implements BaseQuickAdapter.OnIte
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        toast(position + "");
+        PayTypeBean o = (PayTypeBean) adapter.getData().get(position);
+        payTypeAdapter.setSelectPosition(position);
+        switch (o.getTag()) {
+            case 0:
+                toast("支付宝支付--->" + etPayPrice.getText().toString());
+                break;
+            case 1:
+                toast("微信支付--->" + etPayPrice.getText().toString());
+                break;
+        }
     }
 
     @Override

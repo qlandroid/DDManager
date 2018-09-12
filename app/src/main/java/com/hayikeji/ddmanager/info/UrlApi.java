@@ -58,6 +58,9 @@ public class UrlApi {
     public static String agreement = baseUrl + "/agreement.html";
     //公司介绍
     public static String cc_introduce = baseUrl + "/cc_introduce.html";
+    //合作伙伴
+    public static String league_all =baseUrl + "/league_all.html";
+
     public static String shopping_goods_list = baseUrl + "/shopping/getGoodsList";
     public static String goods_details = baseUrl + "/shopping/getGoodsDetails";
     public static String payment = baseUrl + "/shopping/payment";
